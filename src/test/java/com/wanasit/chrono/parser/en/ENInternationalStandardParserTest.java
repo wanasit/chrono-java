@@ -21,7 +21,7 @@ public class ENInternationalStandardParserTest extends ParserTestAbstract {
 
     @Test
     public void test() throws IOException {
-
+        
         results = Chrono.Parse("2013-02-07", refDate);
 
         assertEquals(1, results.size());

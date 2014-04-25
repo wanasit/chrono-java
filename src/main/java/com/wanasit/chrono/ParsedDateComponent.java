@@ -90,4 +90,9 @@ public class ParsedDateComponent {
             this.impliedValues.put(component, value);
         }
     }
+    
+    @Override
+    public String toString() {
+        return knownValues.toString() + " +("+ impliedValues.toString()+")";
+    }
 }
