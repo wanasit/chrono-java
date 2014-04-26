@@ -1,7 +1,8 @@
 package com.wanasit.chrono.parser.en;
 
-import static com.wanasit.chrono.ParserTestAbstract.Assert.assertEquals;
 import static org.junit.Assert.*;
+
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,25 +18,47 @@ public class ENMonthNameMiddleEndianParserTest extends ParserTestAbstract {
     }
     
     @Test
-    public void testSingleDate() {
+    public void testWithImpossibleDate() throws IOException {
         
+        results = Chrono.Parse("August 32", refDate);
+        assertEquals(0, results.size());
         
+        results = Chrono.Parse("August 32, 2014", refDate);
+        assertEquals(0, results.size());
+        
+        results = Chrono.Parse("Feb 29th 2014", refDate);
+        assertEquals(0, results.size());
+    }
+    
+    @Test
+    public void testWithSingleDateExpression() {
+        
+        // Short
         results = Chrono.Parse("August 10", refDate);
 
         assertEquals(1, results.size());
-
         
         assertEquals(0, results.get(0).index);
         assertEquals("August 10", results.get(0).text);
         
         assertNotNull(results.get(0).start);
-        assertEquals(createDate(2012, 8, 10, 12, 0), results.get(0).start);
+        assertDateEquals(createDate(2012, 8, 10, 12, 0), results.get(0).start);
         
         assertNull(results.get(0).end);
         
+        // Full
+        results = Chrono.Parse("August 10, 2014", refDate);
+
+        assertEquals(1, results.size());
         
-        //results = Chrono.Parse("32 August", refDate);
-        //assertEquals(0, results.size());
+        assertEquals(0, results.get(0).index);
+        assertEquals("August 10, 2014", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2014, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
     }
 
 }

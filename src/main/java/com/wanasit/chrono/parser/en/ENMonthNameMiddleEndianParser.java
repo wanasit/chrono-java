@@ -1,13 +1,12 @@
 package com.wanasit.chrono.parser.en;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.wanasit.chrono.ChronoConstants;
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
@@ -40,12 +39,12 @@ public class ENMonthNameMiddleEndianParser extends Parser {
         Pattern fullPattern = Pattern.compile(regFullPattern);
         Matcher fullMatcher = fullPattern.matcher(text);
         if (fullMatcher.find(matcher.start()) && fullMatcher.start() == matcher.start()) {
-
+            matcher = fullMatcher;
             result.index = matcher.start() + matcher.group(1).length();
             result.text = matcher.group().substring(matcher.group(1).length(),
                     matcher.group().length() - matcher.group(14).length());
 
-            year = Integer.parseInt(matcher.group(12));
+            year = Integer.parseInt(matcher.group(12).trim());
             if (matcher.group(13) != null) {
                 year -= 543;
             }
@@ -54,18 +53,15 @@ public class ENMonthNameMiddleEndianParser extends Parser {
             result.index = matcher.start() + matcher.group(1).length();
             result.text = matcher.group().substring(matcher.group(1).length(),
                     matcher.group().length() - matcher.group(11).length());
-
-        }
-
-        String cleanedText = dayStr + " " + monthName + " " + year;
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
-        try {
-            date = format.parse(cleanedText);
-        } catch (ParseException e) {
-            return null;
         }
         
-        calendar.setTime(date);
+        int day   = Integer.parseInt(dayStr);
+        int month = ChronoConstants.MONTH_NAMES.get(monthName.toLowerCase())-1;        
+        calendar.set(year, month, day);
+        
+        // Check for an impossible date
+        if (calendar.get(Calendar.DAY_OF_MONTH) != day) return null;
+        
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
         result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));

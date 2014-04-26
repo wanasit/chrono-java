@@ -12,15 +12,12 @@ import com.wanasit.chrono.ParsedResult;
 
 public class ParserTestAbstract {
     
-    public static class Assert {
-        
-        public static void assertEquals(Date date1, Date date2) {
-            org.junit.Assert.assertEquals(date1.getTime(), date2.getTime(), 1000);
-        }
-        
-        public static void assertEquals(Date date1, ParsedDateComponent component) {
-            assertEquals(date1, component.date());
-        }
+    public static void assertDateEquals(Date date1, Date date2) {
+        org.junit.Assert.assertEquals(date1.getTime(), date2.getTime(), 1000);
+    }
+    
+    public static void assertDateEquals(Date date1, ParsedDateComponent component) {
+        assertDateEquals(date1, component.date());
     }
     
     

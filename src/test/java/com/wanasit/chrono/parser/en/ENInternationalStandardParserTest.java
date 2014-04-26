@@ -1,7 +1,6 @@
 package com.wanasit.chrono.parser.en;
 
 import static org.junit.Assert.*;
-import static com.wanasit.chrono.ParserTestAbstract.Assert.*;
 
 import java.io.IOException;
 
@@ -31,7 +30,7 @@ public class ENInternationalStandardParserTest extends ParserTestAbstract {
         assertEquals("2013-02-07", results.get(0).text);
         
         assertNotNull(results.get(0).start);
-        assertEquals(createDate(2013, 2, 7, 12, 0), results.get(0).start);
+        assertDateEquals(createDate(2013, 2, 7, 12, 0), results.get(0).start);
         
         assertNull(results.get(0).end);
     }
