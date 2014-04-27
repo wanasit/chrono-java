@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wanasit.chrono.parser.en.*;
-import com.wanasit.chrono.refiner.MissingTimeRefiner;
+import com.wanasit.chrono.refiner.MergeDateAndTimeRefiner;
 
 public class ChronoOptions {
     
@@ -31,11 +31,11 @@ public class ChronoOptions {
         this.parserClasses.add(ENInternationalStandardParser.class);
         this.parserClasses.add(ENMonthNameLittleEndianParser.class);
         this.parserClasses.add(ENMonthNameMiddleEndianParser.class);
-        this.parserClasses.add(ENSlashBesedParser.class);
-        
+        this.parserClasses.add(ENSlashDateFormatParser.class);
+        this.parserClasses.add(ENTimeExpressionParser.class);
         
         this.refinerClasses = new LinkedList<Class<? extends Refiner>>();
-        this.refinerClasses.add(MissingTimeRefiner.class);
+        this.refinerClasses.add(MergeDateAndTimeRefiner.class);
         
         this.timezoneOffset = Calendar.getInstance().getTimeZone().getOffset(0);
         

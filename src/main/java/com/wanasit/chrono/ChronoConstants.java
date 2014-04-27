@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ChronoConstants {
     
+    public static Map<String, Integer> DAY_OF_WEEK_NAMES;
     public static Map<String, Integer> MONTH_NAMES;
     
     static {

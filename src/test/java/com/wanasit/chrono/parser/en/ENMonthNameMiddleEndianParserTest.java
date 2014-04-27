@@ -60,5 +60,39 @@ public class ENMonthNameMiddleEndianParserTest extends ParserTestAbstract {
         assertNull(results.get(0).end);
         
     }
+    
+    
+    @Test
+    public void testWithRangeExpression() {
+        
+        // Short
+        results = Chrono.Parse("August 10-12", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("August 10-12", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2012, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNotNull(results.get(0).end);
+        assertDateEquals(createDate(2012, 8, 12, 12, 0), results.get(0).end);
+        
+        // Full
+        results = Chrono.Parse("August 10 - 11, 2014", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("August 10 - 11, 2014", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2014, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNotNull(results.get(0).end);
+        assertDateEquals(createDate(2014, 8, 11, 12, 0), results.get(0).end);
+        
+    }
 
 }

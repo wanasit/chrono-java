@@ -30,7 +30,6 @@ public class ENMonthNameMiddleEndianParser extends Parser {
         calendar.setTime(refDate);
 
         ParsedResult result = new ParsedResult();
-        Date date = null;
 
         String monthName = matcher.group(4);
         String dayStr = matcher.group(9);
@@ -68,7 +67,7 @@ public class ENMonthNameMiddleEndianParser extends Parser {
 
         if (matcher.group(5) != null) {
             
-            int startDay = Integer.parseInt(matcher.group(5));
+            int startDay = Integer.parseInt(matcher.group(6));
             calendar.set(Calendar.DAY_OF_MONTH, startDay);
             
             // Check for an impossible date

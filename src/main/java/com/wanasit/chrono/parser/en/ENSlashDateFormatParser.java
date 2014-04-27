@@ -1,10 +1,7 @@
 package com.wanasit.chrono.parser.en;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +10,7 @@ import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 
-public class ENSlashBesedParser extends Parser {
+public class ENSlashDateFormatParser extends Parser {
     
     
     protected static String regPattern = "(\\W|^)(Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thur|Thursday|Fri|Friday|Sat|Saturday)?\\s*\\,?\\s*([0-9]{1,2})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{4}|[0-9]{2}))?(\\W|$)";
@@ -42,8 +39,6 @@ public class ENSlashBesedParser extends Parser {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(refDate);
         
-        
-        //matchedTokens[6] || moment(ref).year() + '';
         int day = Integer.parseInt(matcher.group(4));
         int month = Integer.parseInt(matcher.group(3));
         int year  = calendar.get(Calendar.YEAR);
@@ -59,16 +54,11 @@ public class ENSlashBesedParser extends Parser {
             }
         }
         
-        Date date = null;
-        String cleanedText = month + "/" + day + "/" + year;
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-        try {
-            date = format.parse(cleanedText);
-        } catch (ParseException e) {
-            return null;
-        } 
+        calendar.set(year, month-1, day);
         
-        calendar.setTime(date);
+        // Check leap day or impossible date
+        if (calendar.get(Calendar.DAY_OF_MONTH) != day) return null;
+        
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) +1);
         result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));

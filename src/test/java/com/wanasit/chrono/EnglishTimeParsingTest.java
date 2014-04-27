@@ -16,7 +16,7 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
     }
 
     @Test
-    public void testSingleTimeExpFollowingDate() throws IOException {
+    public void testWithSingleDateExpression() throws IOException {
         
         refDate = createDate(2014, 4, 20, 12, 0);
         results = Chrono.Parse("Something happen on 2014-04-18 3.00 AM", refDate);
@@ -47,10 +47,37 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
         
         assertEquals("2014-04-18 13:00", results.get(0).text);
         assertDateEquals(createDate(2014, 4, 18, 13, 0), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("Something happen on 13:00 of 2014-04-18 sa", refDate);
+
+        
+        assertEquals("13:00 of 2014-04-18", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 18, 13, 0), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("At 13:00 on 2014-04-18, there was an accident", refDate);
+
+        
+        assertEquals("At 13:00 on 2014-04-18", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 18, 13, 0), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("On 1 PM, There was a new about the project on April 18", refDate);
+
+        
+        assertEquals("1 PM", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 20, 13, 0), results.get(0).start);
+        
+        assertEquals("April 18", results.get(1).text);
+        assertDateEquals(createDate(2014, 4, 18, 12, 0), results.get(1).start);
     }
     
     @Test
-    public void testTimeRange() throws IOException {
+    public void testWithRangeExpression() throws IOException {
         
         
         refDate = createDate(2014, 4, 20, 12, 0);
