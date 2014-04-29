@@ -102,6 +102,23 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
         assertEquals("2014-04-18 7:00 - 8:00 PM", results.get(0).text);
         assertDateEquals(createDate(2014, 4, 18, 19, 0), results.get(0).start);
         assertDateEquals(createDate(2014, 4, 18, 20, 0), results.get(0).end);
+        
+
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("Something happen on 2014-04-18 7:00 - 2014-04-19 8:00 PM...", refDate);
+
+        assertEquals("2014-04-18 7:00 - 2014-04-19 8:00 PM", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 18, 7, 0), results.get(0).start);
+        assertDateEquals(createDate(2014, 4, 19, 20, 0), results.get(0).end);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("Something happen between April 18 - June 2 ...", refDate);
+        
+        assertEquals("April 18 - June 2", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 18, 12, 0), results.get(0).start);
+        assertDateEquals(createDate(2014, 6, 2, 12, 0), results.get(0).end);
+        
     }
     
     

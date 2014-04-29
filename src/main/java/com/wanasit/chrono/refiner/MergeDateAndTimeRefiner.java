@@ -21,7 +21,7 @@ public class MergeDateAndTimeRefiner extends Refiner {
         return !result.start.isCertain(Components.Day) && !result.start.isCertain(Components.DayOfWeek);
     }
     
-    protected static boolean ableToMergeble(String text, ParsedResult prevResult, ParsedResult curResult){
+    protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         
         Pattern allowedPattern = Pattern.compile("\\s*(at|on|of|,)?\\s*", Pattern.CASE_INSENSITIVE);
         String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
@@ -81,14 +81,14 @@ public class MergeDateAndTimeRefiner extends Refiner {
             prevResult = results.get(i-1);
             
             if (isDateOnly(prevResult) && isTimeOnly(currResult) 
-                    && ableToMergeble(text, prevResult, currResult)) {
+                    && ableToMerge(text, prevResult, currResult)) {
                 
                 prevResult = mergeResult(text, prevResult, currResult);
                 currResult = null;
                 i += 1;
                 
             } else if (isDateOnly(currResult) && isTimeOnly(prevResult)
-                    && ableToMergeble(text, prevResult, currResult)) {
+                    && ableToMerge(text, prevResult, currResult)) {
                 
                 prevResult = mergeResult(text, currResult, prevResult);
                 currResult = null;

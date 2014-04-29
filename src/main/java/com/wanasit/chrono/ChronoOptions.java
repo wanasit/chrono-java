@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.wanasit.chrono.parser.en.*;
 import com.wanasit.chrono.refiner.MergeDateAndTimeRefiner;
+import com.wanasit.chrono.refiner.MergeDateRangeRefiner;
 
 public class ChronoOptions {
     
@@ -36,6 +37,7 @@ public class ChronoOptions {
         
         this.refinerClasses = new LinkedList<Class<? extends Refiner>>();
         this.refinerClasses.add(MergeDateAndTimeRefiner.class);
+        this.refinerClasses.add(MergeDateRangeRefiner.class);
         
         this.timezoneOffset = Calendar.getInstance().getTimeZone().getOffset(0);
         
