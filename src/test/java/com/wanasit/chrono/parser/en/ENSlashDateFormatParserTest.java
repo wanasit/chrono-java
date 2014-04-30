@@ -45,6 +45,19 @@ public class ENSlashDateFormatParserTest extends ParserTestAbstract{
         assertDateEquals(createDate(2012, 8, 10, 12, 0), results.get(0).start);
         
         assertNull(results.get(0).end);
+                              //0123456789012
+        results = Chrono.Parse("Somthing on 2/29", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(12, results.get(0).index);
+        assertEquals("2/29", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2012, 2, 29, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
         
         // Full
         results = Chrono.Parse("8/10/2014", refDate);

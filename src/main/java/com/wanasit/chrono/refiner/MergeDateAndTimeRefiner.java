@@ -23,10 +23,16 @@ public class MergeDateAndTimeRefiner extends Refiner {
     
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         
+        try{
         Pattern allowedPattern = Pattern.compile("\\s*(at|on|of|,)?\\s*", Pattern.CASE_INSENSITIVE);
         String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
-        
         return allowedPattern.matcher(textBetween).matches();
+        }catch(Exception ex){
+            
+            
+        }
+        
+        return false;
     }
     
     protected static ParsedResult mergeResult(String text, ParsedResult dateResult, ParsedResult timeResult){

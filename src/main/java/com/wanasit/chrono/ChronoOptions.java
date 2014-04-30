@@ -9,6 +9,8 @@ import java.util.Map;
 import com.wanasit.chrono.parser.en.*;
 import com.wanasit.chrono.refiner.MergeDateAndTimeRefiner;
 import com.wanasit.chrono.refiner.MergeDateRangeRefiner;
+import com.wanasit.chrono.refiner.RemoveOverlap;
+import com.wanasit.chrono.refiner.PrefixCheckRefiner;
 
 public class ChronoOptions {
     
@@ -32,10 +34,13 @@ public class ChronoOptions {
         this.parserClasses.add(ENInternationalStandardParser.class);
         this.parserClasses.add(ENMonthNameLittleEndianParser.class);
         this.parserClasses.add(ENMonthNameMiddleEndianParser.class);
+        this.parserClasses.add(ENSlashBigEndianDateFormatParser.class);
         this.parserClasses.add(ENSlashDateFormatParser.class);
         this.parserClasses.add(ENTimeExpressionParser.class);
         
         this.refinerClasses = new LinkedList<Class<? extends Refiner>>();
+        this.refinerClasses.add(PrefixCheckRefiner.class);
+        this.refinerClasses.add(RemoveOverlap.class);
         this.refinerClasses.add(MergeDateAndTimeRefiner.class);
         this.refinerClasses.add(MergeDateRangeRefiner.class);
         

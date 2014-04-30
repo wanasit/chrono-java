@@ -13,8 +13,8 @@ import com.wanasit.chrono.ParsedDateComponent.Components;
 
 public class ENTimeExpressionParser extends Parser {
 
-    protected static String FIRST_REG_PATTERN = "(\\W|^)(at|from)?\\s*([0-9]{1,4}|noon|midnight)((\\.|\\:|\\：)([0-9]{1,2})((\\.|\\:|\\：)([0-9]{1,2}))?)?(\\s*(AM|PM))?(\\W|$)";
-    protected static String SECOND_REG_PATTERN = "\\s*(\\-|\\~|\\〜|to|\\?)\\s*([0-9]{1,4})((\\.|\\:|\\：)([0-9]{1,2})((\\.|\\:|\\：)([0-9]{1,2}))?)?(\\s*(AM|PM))?";
+    protected static String FIRST_REG_PATTERN = "(\\W|^)(at|from)?\\s*([0-9]{1,4}|noon|midnight)((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?(\\W|$)";
+    protected static String SECOND_REG_PATTERN = "\\s*(\\-|\\~|\\〜|to|\\?)\\s*([0-9]{1,4})((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?";
     
     @Override
     protected Pattern pattern() {

@@ -10,10 +10,10 @@ import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 
-public class ENSlashDateFormatParser extends Parser {
+public class ENSlashBigEndianDateFormatParser extends Parser {
     
     
-    protected static String regPattern = "(\\W|^)(Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thur|Thursday|Fri|Friday|Sat|Saturday)?\\s*\\,?\\s*([0-9]{1,2})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{4}|[0-9]{2}))?(\\W|$)";
+    protected static String regPattern = "(\\W|^)([0-9]{4})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{1,2}))?(\\W|$)";
     
     @Override
     protected Pattern pattern() {
@@ -22,9 +22,7 @@ public class ENSlashDateFormatParser extends Parser {
 
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
-        // TODO Auto-generated method stub
-        
-        
+
         Pattern datePattern = Pattern.compile("^\\d.\\d$", Pattern.CASE_INSENSITIVE);
         if(datePattern.matcher(matcher.group()).find()) return null;
         
@@ -33,29 +31,24 @@ public class ENSlashDateFormatParser extends Parser {
                 matcher.group());
         
         result.text = result.text.substring(matcher.group(1).length(),
-                result.text.length() - matcher.group(7).length());
+                result.text.length() - matcher.group(6).length());
         
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(refDate);
         
-        int day = Integer.parseInt(matcher.group(4));
-        int month = Integer.parseInt(matcher.group(3));
-        int year  = calendar.get(Calendar.YEAR);
-        if (matcher.group(6) != null) year = Integer.parseInt(matcher.group(6));
         
+        
+        int year  = Integer.parseInt(matcher.group(2));
+        if (year < 1000) return null;
+        
+        int month   = Integer.parseInt(matcher.group(3));
         if (month < 1 || month > 12) return null;
-        if (day < 1 || day > 31) return null;
-        if (year < 100){
-            if(year > 50){
-                year = year + 2500 - 543; //BE
-            } else {
-                year = year + 2000; //AD
-            }
-        }
         
-        calendar.set(year, month-1, day);
+        int day     = Integer.parseInt(matcher.group(5));
+        if (day < 1 || day > 31) return null;
         
         // Check leap day or impossible date
+        calendar.set(year, month-1, day);
         if (calendar.get(Calendar.DAY_OF_MONTH) != day) return null;
         
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));

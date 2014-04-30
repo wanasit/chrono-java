@@ -12,10 +12,17 @@ public class MergeDateRangeRefiner extends Refiner {
     
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         
-        Pattern allowedPattern = Pattern.compile("\\s*(and|to|-|ー)?\\s*", Pattern.CASE_INSENSITIVE);
-        String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
+        try{
+            Pattern allowedPattern = Pattern.compile("\\s*(and|to|-|ー)?\\s*", Pattern.CASE_INSENSITIVE);
+            String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
+            
+            return allowedPattern.matcher(textBetween).matches();
         
-        return allowedPattern.matcher(textBetween).matches();
+        }catch(StringIndexOutOfBoundsException ex){
+            
+        }
+        
+        return false;
     }
     
     protected static ParsedResult mergeResult(String text, ParsedResult fromResult, ParsedResult toResult){

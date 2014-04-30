@@ -121,8 +121,48 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
         
     }
     
-    
-    
-    
+    @Test
+    public void testWithRealWorldData() throws IOException {
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("MRYN 2014-03-27 11:00 名刺を本のように収納できる名刺ホルダー「harrytoree」を使ってみました", refDate);
+        
+        assertEquals("2014-03-27 11:00", results.get(0).text);
+        assertDateEquals(createDate(2014, 3, 27, 11, 0), results.get(0).start);
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("GIGAZINE http://t.co/kkHfyzUVU0 Tetsuji Kondo（近藤 哲司） 2014-03-24 22:15 ", refDate);
+        
+        assertEquals("2014-03-24 22:15", results.get(0).text);
+        assertDateEquals(createDate(2014, 3, 24, 22, 15), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("(2013/11/19) ポスト3.11の世界で、宮島達男が生命体のようなアートを作った理由。", refDate);
+        
+        assertEquals("2013/11/19", results.get(0).text);
+        assertDateEquals(createDate(2013, 11, 19, 12, 0), results.get(0).start);
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("岡村太一 2014-03-24 07:45 [134tweets]名刺を本のように収納できる名刺ホルダー", refDate);
+        
+        assertEquals("2014-03-24 07:45", results.get(0).text);
+        assertDateEquals(createDate(2014, 3, 24, 7, 45), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("http://www.vogue.co.jp/lifestyle/culture/2014-03-19", refDate);
+        
+        assertEquals("2014-03-19", results.get(0).text);
+        assertDateEquals(createDate(2014, 3, 19, 12, 0), results.get(0).start);
+        
+        
+        refDate = createDate(2014, 4, 20, 12, 0);
+        results = Chrono.Parse("http://www.forbes.com/sites/ceciliarodriguez/2014/04/08/shopping-in-paris-no-more-late-nights/", refDate);
+        
+        assertEquals("2014/04/08", results.get(0).text);
+        assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
+        
+    }
     
 }
