@@ -14,11 +14,15 @@ public class ENInternationalStandardParser extends Parser {
     
     @Override
     protected Pattern pattern() {
-        return Pattern.compile("([0-9]{4})\\-([0-9]{1,2})\\-([0-9]{1,2})(\\W|$)", Pattern.CASE_INSENSITIVE);
+        return Pattern.compile("([0-9]{4})\\-([0-9]{1,2})\\-([0-9]{1,2})(T|\\W|$)", Pattern.CASE_INSENSITIVE);
     }
     
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
+        
+        if (matcher.group(4).equals("T")) { 
+            
+        }
         
         ParsedResult result = new ParsedResult();
         result.text  = matcher.group();
