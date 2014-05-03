@@ -18,8 +18,29 @@ public class ChronoOptions {
     
     
     
-    public static final ChronoOptions sharedOptions = new ChronoOptions();
+    public static final ChronoOptions sharedOptions = createStandartOptions();
     
+    public static ChronoOptions createStandartOptions() {
+        ChronoOptions options = new ChronoOptions();
+        
+        // All Parsers
+        options.parserClasses.add(ENInternationalStandardParser.class);
+        options.parserClasses.add(ENMonthNameLittleEndianParser.class);
+        options.parserClasses.add(ENMonthNameMiddleEndianParser.class);
+        options.parserClasses.add(ENSlashBigEndianDateFormatParser.class);
+        options.parserClasses.add(ENSlashDateFormatParser.class);
+        options.parserClasses.add(ENTimeExpressionParser.class);
+        options.parserClasses.add(JPStandartDateFormatParser.class);
+        
+        // Standard Pipeline
+        options.refinerClasses.add(PrefixCheckFilter.class);
+        options.refinerClasses.add(RemoveOverlapRefiner.class);
+        options.refinerClasses.add(MergeDateAndTimeRefiner.class);
+        options.refinerClasses.add(MergeDateRangeRefiner.class);
+        options.refinerClasses.add(LowProbabilityFormatFilter.class);
+        
+        return options;
+    }
     
     public List< Class<? extends Parser > > parserClasses = null;
     public List< Class<? extends Refiner> > refinerClasses = null;
@@ -28,28 +49,11 @@ public class ChronoOptions {
     public Map<String, Integer> timezoneMap = null;
     
     
-    public ChronoOptions() {
+    protected ChronoOptions() {
         
         this.parserClasses = new LinkedList<Class<? extends Parser>>();
-        this.parserClasses.add(ENInternationalStandardParser.class);
-        this.parserClasses.add(ENMonthNameLittleEndianParser.class);
-        this.parserClasses.add(ENMonthNameMiddleEndianParser.class);
-        this.parserClasses.add(ENSlashBigEndianDateFormatParser.class);
-        this.parserClasses.add(ENSlashDateFormatParser.class);
-        this.parserClasses.add(ENTimeExpressionParser.class);
-        
-        this.parserClasses.add(JPStandartDateFormatParser.class);
-        
         this.refinerClasses = new LinkedList<Class<? extends Refiner>>();
-        this.refinerClasses.add(PrefixCheckFilter.class);
-        this.refinerClasses.add(RemoveOverlapRefiner.class);
-        this.refinerClasses.add(MergeDateAndTimeRefiner.class);
-        this.refinerClasses.add(MergeDateRangeRefiner.class);
-        
-        this.refinerClasses.add(LowProbabilityFormatFilter.class);
-        
         this.timezoneOffset = Calendar.getInstance().getTimeZone().getOffset(0);
-        
         this.timezoneMap = new HashMap<String, Integer>();
     }
     
