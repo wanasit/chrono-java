@@ -136,7 +136,6 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
         assertEquals("2014-03-24 22:15", results.get(0).text);
         assertDateEquals(createDate(2014, 3, 24, 22, 15), results.get(0).start);
         
-        
         refDate = createDate(2014, 4, 20, 12, 0);
         results = Chrono.Parse("(2013/11/19) ポスト3.11の世界で、宮島達男が生命体のようなアートを作った理由。", refDate);
         

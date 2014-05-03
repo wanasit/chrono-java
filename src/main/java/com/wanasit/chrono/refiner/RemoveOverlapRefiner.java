@@ -6,7 +6,7 @@ import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.Refiner;
 
-public class RemoveOverlap extends Refiner {
+public class RemoveOverlapRefiner extends Refiner {
     
     @Override
     public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOptions options) {

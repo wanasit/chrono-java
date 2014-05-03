@@ -20,10 +20,6 @@ public class ENInternationalStandardParser extends Parser {
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
         
-        if (matcher.group(4).equals("T")) { 
-            
-        }
-        
         ParsedResult result = new ParsedResult();
         result.text  = matcher.group();
         result.text  = result.text.substring(0, result.text.length() - matcher.group(4).length());

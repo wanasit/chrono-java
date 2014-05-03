@@ -6,19 +6,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.wanasit.chrono.filter.LowProbabilityFormatFilter;
+import com.wanasit.chrono.filter.PrefixCheckFilter;
 import com.wanasit.chrono.parser.en.*;
+import com.wanasit.chrono.parser.jp.JPStandartDateFormatParser;
 import com.wanasit.chrono.refiner.MergeDateAndTimeRefiner;
 import com.wanasit.chrono.refiner.MergeDateRangeRefiner;
-import com.wanasit.chrono.refiner.RemoveOverlap;
-import com.wanasit.chrono.refiner.PrefixCheckRefiner;
+import com.wanasit.chrono.refiner.RemoveOverlapRefiner;
 
 public class ChronoOptions {
     
     
     
     public static final ChronoOptions sharedOptions = new ChronoOptions();
-    
-    
     
     
     public List< Class<? extends Parser > > parserClasses = null;
@@ -38,11 +38,15 @@ public class ChronoOptions {
         this.parserClasses.add(ENSlashDateFormatParser.class);
         this.parserClasses.add(ENTimeExpressionParser.class);
         
+        this.parserClasses.add(JPStandartDateFormatParser.class);
+        
         this.refinerClasses = new LinkedList<Class<? extends Refiner>>();
-        this.refinerClasses.add(PrefixCheckRefiner.class);
-        this.refinerClasses.add(RemoveOverlap.class);
+        this.refinerClasses.add(PrefixCheckFilter.class);
+        this.refinerClasses.add(RemoveOverlapRefiner.class);
         this.refinerClasses.add(MergeDateAndTimeRefiner.class);
         this.refinerClasses.add(MergeDateRangeRefiner.class);
+        
+        this.refinerClasses.add(LowProbabilityFormatFilter.class);
         
         this.timezoneOffset = Calendar.getInstance().getTimeZone().getOffset(0);
         

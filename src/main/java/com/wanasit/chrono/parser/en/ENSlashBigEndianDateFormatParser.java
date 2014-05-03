@@ -13,7 +13,7 @@ import com.wanasit.chrono.ParsedDateComponent.Components;
 public class ENSlashBigEndianDateFormatParser extends Parser {
     
     
-    protected static String regPattern = "(\\W|^)([0-9]{4})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{1,2}))?(\\W|$)";
+    protected static String regPattern = "(\\W|^)([0-9]{4})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{1,2}))(\\W|$)";
     
     @Override
     protected Pattern pattern() {
