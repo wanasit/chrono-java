@@ -2,6 +2,7 @@ package com.wanasit.chrono;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +23,12 @@ public class ParsedDateComponent {
     protected Map<Components, Integer> knownValues;
     protected Map<Components, Integer> impliedValues;
     
-    
     public ParsedDateComponent () {
-        this(new HashMap<ParsedDateComponent.Components, Integer>());
+        this(new EnumMap<ParsedDateComponent.Components, Integer>(Components.class));
     }
     
     public ParsedDateComponent (Map<Components, Integer> knownValues) {
-        this(knownValues, new HashMap<ParsedDateComponent.Components, Integer>());
+        this(knownValues, new EnumMap<ParsedDateComponent.Components, Integer>(Components.class));
     }
     
     public ParsedDateComponent (Map<Components, Integer> knownValues, Map<Components, Integer> impliedValues) {
@@ -46,8 +46,6 @@ public class ParsedDateComponent {
         this(new HashMap<ParsedDateComponent.Components, Integer>(other.knownValues),
              new HashMap<ParsedDateComponent.Components, Integer>(other.impliedValues));
     }
-    
-    
     
     
     public Date date(){

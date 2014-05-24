@@ -1,4 +1,4 @@
-package com.wanasit.chrono.refiner;
+package com.wanasit.chrono.refiner.en;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.refiner.RefinerAbstract;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Refiner;
 
-public class MergeDateAndTimeRefiner extends Refiner {
+public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
 
     
     protected static boolean isDateOnly(ParsedResult result){

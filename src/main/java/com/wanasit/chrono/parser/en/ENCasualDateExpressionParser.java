@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENCasualDateExpressionParser extends Parser {
+public class ENCasualDateExpressionParser extends ParserAbstract {
     
     protected static String regPattern = "(today|tonight|tomorrow|yesterday|last\\s*night|([0-9]+)\\s*day(s)\\s*ago)(\\W|$)";
     

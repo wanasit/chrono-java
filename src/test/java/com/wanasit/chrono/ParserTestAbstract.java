@@ -20,12 +20,8 @@ public class ParserTestAbstract {
         assertDateEquals(date1, component.date());
     }
     
-    
-    protected Calendar calendar = Calendar.getInstance();
-    
     protected Date refDate = null;
     protected List<ParsedResult> results = null;
-    
     
     @Before
     public void setup() {
@@ -37,6 +33,7 @@ public class ParserTestAbstract {
     }
     
     protected Date createDate(int year, int month, int date, int hour, int minute, int second) {
+        Calendar calendar = Calendar.getInstance();
         calendar.set(year, month-1, date, hour, minute, second);
         return calendar.getTime();
     }

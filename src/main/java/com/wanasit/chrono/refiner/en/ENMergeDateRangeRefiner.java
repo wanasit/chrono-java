@@ -1,4 +1,4 @@
-package com.wanasit.chrono.refiner;
+package com.wanasit.chrono.refiner.en;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Refiner;
+import com.wanasit.chrono.refiner.RefinerAbstract;
 
-public class MergeDateRangeRefiner extends Refiner {
+public class ENMergeDateRangeRefiner extends RefinerAbstract {
     
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         

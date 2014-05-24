@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENSlashDateFormatParser extends Parser {
+public class ENSlashDateFormatParser extends ParserAbstract {
     
     
     protected static String regPattern = "(\\W|^)(Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thur|Thursday|Fri|Friday|Sat|Saturday)?\\s*\\,?\\s*([0-9]{1,2})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{4}|[0-9]{2}))?(\\W|$)";

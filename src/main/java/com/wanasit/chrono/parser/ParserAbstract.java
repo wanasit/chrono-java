@@ -1,4 +1,4 @@
-package com.wanasit.chrono;
+package com.wanasit.chrono.parser;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ParsedResult;
 
-public abstract class Parser {
+
+public abstract class ParserAbstract implements Parser {
     
     
     protected abstract Pattern pattern();
@@ -30,28 +33,6 @@ public abstract class Parser {
                 searchingIndex = matcher.start() + 1;
                 continue;
             }
-            
-            /*
-            if ( !result.start.isCertain(Components.Hour) || 
-               ( result.end != null && !result.end.isCertain(Components.Hour))) {
-                
-                ParsedResult timedResult = this.extractTimeFollowsResult(result);
-                if (timedResult != null) result = timedResult; 
-            }
-            
-            if ( !result.start.isCertain(Components.TimezoneOffset) || 
-               ( result.end != null && !result.end.isCertain(Components.TimezoneOffset))) {
-                
-                ParsedResult timezonedResult = this.extractTimezoneFollowsResult(result);
-                if (timezonedResult != null) result = timezonedResult; 
-            }
-            
-            if (results.size() > 0) {
-                
-                ParsedResult prevResult = results.get(results.size() - 1);
-                ParsedResult mergedResult = this.mergeResults(result, prevResult);
-                if (mergedResult != null) result = mergedResult; 
-            }*/
             
             searchingIndex = result.index + result.text.length() + 1;
             results.add(result);

@@ -10,10 +10,10 @@ import com.wanasit.chrono.ChronoConstants;
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENMonthNameMiddleEndianParser extends Parser {
+public class ENMonthNameMiddleEndianParser extends ParserAbstract {
 
     protected static String regFullPattern  = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?(Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December)\\s*(([0-9]{1,2})(st|nd|rd|th)?\\s*(to|\\-)\\s*)?([0-9]{1,2})(st|nd|rd|th)?(,)?(\\s*[0-9]{4})(\\s*BE)?(\\W|$)";
     protected static String regShortPattern = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?(Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December)\\s*(([0-9]{1,2})(st|nd|rd|th)?\\s*(to|\\-)\\s*)?([0-9]{1,2})(st|nd|rd|th)?([^0-9]|$)";

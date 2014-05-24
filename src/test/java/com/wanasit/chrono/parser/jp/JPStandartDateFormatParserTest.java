@@ -60,6 +60,34 @@ public class JPStandartDateFormatParserTest extends ParserTestAbstract {
         
         
         refDate = createDate(2012, 6, 5, 12, 0);
+        results = Chrono.Parse("今年８月１０日", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("今年８月１０日", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2012, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
+        
+        refDate = createDate(2012, 6, 5, 12, 0);
+        results = Chrono.Parse("来年８月１０日", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("来年８月１０日", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2013, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
+        
+        refDate = createDate(2012, 6, 5, 12, 0);
         results = Chrono.Parse("２０１４年８月１０日", refDate);
 
         assertEquals(1, results.size());
@@ -71,6 +99,21 @@ public class JPStandartDateFormatParserTest extends ParserTestAbstract {
         assertDateEquals(createDate(2014, 8, 10, 12, 0), results.get(0).start);
         
         assertNull(results.get(0).end);
+        
+        
+        refDate = createDate(2012, 6, 5, 12, 0);
+        results = Chrono.Parse("平成２５年８月１０日", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("平成２５年８月１０日", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2014, 8, 10, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
         
         
         refDate = createDate(2012, 6, 5, 12, 0);

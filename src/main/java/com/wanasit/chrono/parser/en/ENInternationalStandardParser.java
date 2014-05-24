@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENInternationalStandardParser extends Parser {
+public class ENInternationalStandardParser extends ParserAbstract {
     
     @Override
     protected Pattern pattern() {

@@ -1,12 +1,13 @@
-package com.wanasit.chrono.refiner;
+package com.wanasit.chrono.refiner.en;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Refiner;
+import com.wanasit.chrono.refiner.RefinerAbstract;
 
-public class RemoveOverlapRefiner extends Refiner {
+public class ENRemoveOverlapRefiner extends RefinerAbstract {
     
     @Override
     public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOptions options) {

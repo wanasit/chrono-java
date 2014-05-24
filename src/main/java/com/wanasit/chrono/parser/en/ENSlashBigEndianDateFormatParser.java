@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENSlashBigEndianDateFormatParser extends Parser {
+public class ENSlashBigEndianDateFormatParser extends ParserAbstract {
     
     
     protected static String regPattern = "(\\W|^)([0-9]{4})[\\/\\.]([0-9]{1,2})([\\/\\.]([0-9]{1,2}))(\\W|$)";

@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 import com.wanasit.chrono.ChronoOptions;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
-import com.wanasit.chrono.Parser;
 import com.wanasit.chrono.ParsedDateComponent.Components;
+import com.wanasit.chrono.parser.ParserAbstract;
 
-public class ENTimeExpressionParser extends Parser {
+public class ENTimeExpressionParser extends ParserAbstract {
 
     protected static String FIRST_REG_PATTERN = "(\\W|^|T)(at|from)?\\s*([0-9]{1,4}|noon|midnight)((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?(\\W|$)";
     protected static String SECOND_REG_PATTERN = "\\s*(\\-|\\~|\\〜|to|\\?)\\s*([0-9]{1,4})((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?";

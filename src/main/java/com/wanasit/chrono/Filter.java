@@ -3,7 +3,9 @@ package com.wanasit.chrono;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Filter extends Refiner{
+import com.wanasit.chrono.refiner.RefinerAbstract;
+
+public abstract class Filter extends RefinerAbstract{
     
     public abstract boolean isValid(String text, ChronoOptions options, ParsedResult result);
     
