@@ -5,13 +5,14 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class ParsedDateComponent {
     
     public enum Components{
         Year,
         Month,
-        Day,
+        DayOfMonth,
         Hour,
         Minute,
         Second,
@@ -20,31 +21,21 @@ public class ParsedDateComponent {
         Meridiem,
     }
     
-    protected Map<Components, Integer> knownValues;
-    protected Map<Components, Integer> impliedValues;
+    protected final Map<Components, Integer> knownValues = new EnumMap<ParsedDateComponent.Components, Integer>(Components.class);
+    protected final Map<Components, Integer> impliedValues = new EnumMap<ParsedDateComponent.Components, Integer>(Components.class);
     
     public ParsedDateComponent () {
-        this(new EnumMap<ParsedDateComponent.Components, Integer>(Components.class));
-    }
-    
-    public ParsedDateComponent (Map<Components, Integer> knownValues) {
-        this(knownValues, new EnumMap<ParsedDateComponent.Components, Integer>(Components.class));
-    }
-    
-    public ParsedDateComponent (Map<Components, Integer> knownValues, Map<Components, Integer> impliedValues) {
-        this.knownValues   = knownValues;
-        this.impliedValues = impliedValues;
-        
-        if (!this.isCertain(Components.Hour) && !this.isCertain(Components.Minute)) {
+	if (!this.isCertain(Components.Hour) && !this.isCertain(Components.Minute)) {
             this.imply(Components.Hour, 12);
             this.imply(Components.Minute, 0);
             this.imply(Components.Second, 0);
         }
     }
     
+    
     public ParsedDateComponent (ParsedDateComponent other) {
-        this(new HashMap<ParsedDateComponent.Components, Integer>(other.knownValues),
-             new HashMap<ParsedDateComponent.Components, Integer>(other.impliedValues));
+	this.impliedValues.putAll(other.knownValues);
+	this.impliedValues.putAll(other.impliedValues);
     }
     
     
@@ -58,7 +49,7 @@ public class ParsedDateComponent {
         Calendar calendar = Calendar.getInstance();
         calendar.set(joinInfo.get(Components.Year), 
                 joinInfo.get(Components.Month)-1, 
-                joinInfo.get(Components.Day),
+                joinInfo.get(Components.DayOfMonth),
                 joinInfo.get(Components.Hour),
                 joinInfo.get(Components.Minute),
                 joinInfo.get(Components.Second));

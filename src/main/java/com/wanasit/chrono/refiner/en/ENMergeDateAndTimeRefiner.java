@@ -18,7 +18,7 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
     }
     
     protected static boolean isTimeOnly(ParsedResult result){
-        return !result.start.isCertain(Components.Day) && !result.start.isCertain(Components.DayOfWeek);
+        return !result.start.isCertain(Components.DayOfMonth) && !result.start.isCertain(Components.DayOfWeek);
     }
     
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){

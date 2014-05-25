@@ -29,7 +29,7 @@ public class ENInternationalStandardParser extends ParserAbstract {
         result.start = new ParsedDateComponent();
         result.start.assign(Components.Year, Integer.parseInt(matcher.group(1)));
         result.start.assign(Components.Month, Integer.parseInt(matcher.group(2)));
-        result.start.assign(Components.Day, Integer.parseInt(matcher.group(3)));
+        result.start.assign(Components.DayOfMonth, Integer.parseInt(matcher.group(3)));
         
         return result;
     }

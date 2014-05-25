@@ -1,8 +1,10 @@
-package com.wanasit.chrono;
+package com.wanasit.chrono.filter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.refiner.RefinerAbstract;
 
 public abstract class Filter extends RefinerAbstract{

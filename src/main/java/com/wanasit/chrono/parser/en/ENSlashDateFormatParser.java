@@ -60,7 +60,7 @@ public class ENSlashDateFormatParser extends ParserAbstract {
         
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) +1);
-        result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+        result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
         
         return result;
     }

@@ -16,7 +16,7 @@ public class JPStandartDateFormatParser extends ParserAbstract {
     
     @Override
     protected Pattern pattern() {
-        return Pattern.compile("(((平成|昭和)?([0-9０-９]{2,4})年|今年|去年|来年)|[^年]|^)([0-9０-９]{1,2}|今|先|来)月([0-9０-９]{1,2})日", Pattern.CASE_INSENSITIVE);
+        return Pattern.compile("(((平成|昭和)?([0-9０-９]{2,4})年|今年|去年|来年)|[^年]|^)([0-9０-９]{1,2}|今|先|来)月([0-9０-９]{1,2})日\\s*(?:\\((?:日|月|火|水|木|金|土)\\))?", Pattern.CASE_INSENSITIVE);
     }
     
     @Override
@@ -75,7 +75,7 @@ public class JPStandartDateFormatParser extends ParserAbstract {
         result.start = new ParsedDateComponent();
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-        result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+        result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
         return result;
     }
 }

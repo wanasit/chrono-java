@@ -30,7 +30,7 @@ public class ENTimeExpressionParser extends ParserAbstract {
             return null;
         
         ParsedResult result = new ParsedResult();
-        result.start.imply(Components.Day,   calendar.get(Calendar.DAY_OF_MONTH));
+        result.start.imply(Components.DayOfMonth,   calendar.get(Calendar.DAY_OF_MONTH));
         result.start.imply(Components.Month, calendar.get(Calendar.MONTH)+1);
         result.start.imply(Components.Year,  calendar.get(Calendar.YEAR));
         
@@ -135,7 +135,7 @@ public class ENTimeExpressionParser extends ParserAbstract {
                     if(result.end == null){
                         result.end = new ParsedDateComponent(result.start);
                     }
-                    result.end.assign(Components.Day, result.end.get(Components.Day) + 1);
+                    result.end.assign(Components.DayOfMonth, result.end.get(Components.DayOfMonth) + 1);
                 }
             }
             
@@ -175,9 +175,8 @@ public class ENTimeExpressionParser extends ParserAbstract {
         if (meridiem >= 0) 
             result.end.assign(Components.Meridiem, meridiem);
         
-        return result;
-        
-        
+	return result;
+
     }
 
 }

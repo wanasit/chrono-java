@@ -141,5 +141,37 @@ public class JPStandartDateFormatParserTest extends ParserTestAbstract {
         assertNull(results.get(0).end);
     }
     
+    @Test
+    public void testWithSingleDateExpressionWithDayOfWeek() {
+        
+        refDate = createDate(2012, 6, 5, 12, 0);
+        results = Chrono.Parse("2014年5月19日(月)", refDate);
 
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("2014年5月19日(月)", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2014, 5, 19, 12, 0), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
+        
+        refDate = createDate(2012, 6, 5, 12, 0);
+        results = Chrono.Parse("2014年5月19日(月)19時30分配信", refDate);
+
+        assertEquals(1, results.size());
+        
+        assertEquals(0, results.get(0).index);
+        assertEquals("2014年5月19日(月)19時30分", results.get(0).text);
+        
+        assertNotNull(results.get(0).start);
+        assertDateEquals(createDate(2014, 5, 19, 19, 30), results.get(0).start);
+        
+        assertNull(results.get(0).end);
+        
+        
+    }
+    
 }

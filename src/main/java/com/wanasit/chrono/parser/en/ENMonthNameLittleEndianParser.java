@@ -108,7 +108,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
 
             result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
             result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-            result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 
             calendar.setTime(date);
             calendar.set(Calendar.DAY_OF_MONTH, endDay);
@@ -119,7 +119,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
             result.end = new ParsedDateComponent();
             result.end.assign(Components.Year, calendar.get(Calendar.YEAR));
             result.end.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-            result.end.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+            result.end.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 
             return result;
         } else {
@@ -128,7 +128,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
 
             result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
             result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-            result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
             return result;
         }
     }

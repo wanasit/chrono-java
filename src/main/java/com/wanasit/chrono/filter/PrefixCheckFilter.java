@@ -3,7 +3,6 @@ package com.wanasit.chrono.filter;
 import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoOptions;
-import com.wanasit.chrono.Filter;
 import com.wanasit.chrono.ParsedResult;
 
 public class PrefixCheckFilter extends Filter {

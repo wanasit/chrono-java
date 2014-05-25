@@ -63,7 +63,7 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-        result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+        result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 
         if (matcher.group(5) != null) {
             
@@ -79,7 +79,7 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
             result.start = new ParsedDateComponent();
             result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
             result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-            result.start.assign(Components.Day, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
         }
         
         return result;
