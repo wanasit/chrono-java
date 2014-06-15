@@ -3,21 +3,16 @@ package com.wanasit.chrono;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import com.wanasit.chrono.filter.LowProbabilityFormatFilter;
 import com.wanasit.chrono.filter.PrefixCheckFilter;
 import com.wanasit.chrono.parser.Parser;
-import com.wanasit.chrono.parser.ParserAbstract;
 import com.wanasit.chrono.parser.en.*;
-import com.wanasit.chrono.parser.jp.JPDateAgoFormatParser;
-import com.wanasit.chrono.parser.jp.JPDayOfWeekDateFormatParser;
-import com.wanasit.chrono.parser.jp.JPStandartDateFormatParser;
-import com.wanasit.chrono.parser.jp.JPTimeExpressionParser;
+import com.wanasit.chrono.parser.jp.*;
+import com.wanasit.chrono.refiner.ExtractConcordanceRefiner;
 import com.wanasit.chrono.refiner.Refiner;
-import com.wanasit.chrono.refiner.RefinerAbstract;
 import com.wanasit.chrono.refiner.en.ENMergeDateAndTimeRefiner;
 import com.wanasit.chrono.refiner.en.ENMergeDateRangeRefiner;
 import com.wanasit.chrono.refiner.en.ENRemoveOverlapRefiner;
@@ -61,6 +56,7 @@ public class ChronoOptions {
         options.refinerClasses.add(ENMergeDateAndTimeRefiner.class);
         options.refinerClasses.add(ENMergeDateRangeRefiner.class);
         options.refinerClasses.add(LowProbabilityFormatFilter.class);
+        options.refinerClasses.add(ExtractConcordanceRefiner.class);
         
         return options;
     }
