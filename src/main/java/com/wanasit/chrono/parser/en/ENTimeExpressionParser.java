@@ -13,8 +13,8 @@ import com.wanasit.chrono.parser.ParserAbstract;
 
 public class ENTimeExpressionParser extends ParserAbstract {
 
-    protected static String FIRST_REG_PATTERN = "(\\W|^|T)(at|from)?\\s*([0-9]{1,4}|noon|midnight)((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?(\\W|$)";
-    protected static String SECOND_REG_PATTERN = "\\s*(\\-|\\~|\\〜|to|\\?)\\s*([0-9]{1,4})((\\.|\\:|\\：)([0-9]{2})((\\.|\\:|\\：)([0-9]{2}))?)?(\\s*(AM|PM))?";
+    protected static String FIRST_REG_PATTERN = "(\\W|^|T)(at|from)?\\s*(\\d{1,2}|noon|midnight)((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(\\s*(AM|PM))?(\\W|$)";
+    protected static String SECOND_REG_PATTERN = "^\\s*(\\-|\\~|\\〜|to|\\?)\\s*(\\d{1,2})((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(\\s*(AM|PM))?(?=\\s|\\W|$)";
     
     @Override
     protected Pattern pattern() {
@@ -95,8 +95,8 @@ public class ENTimeExpressionParser extends ParserAbstract {
             result.start.assign(Components.Meridiem, meridiem);
         
         Pattern secondPattern = Pattern.compile(SECOND_REG_PATTERN, Pattern.CASE_INSENSITIVE);
-        matcher = secondPattern.matcher(text);
-        if (!matcher.find(result.index + result.text.length())) {
+        matcher = secondPattern.matcher(text.substring(result.index + result.text.length()));
+        if (!matcher.find()) {
             return result;
         }
         
