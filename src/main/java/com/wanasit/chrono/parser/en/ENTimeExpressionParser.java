@@ -13,8 +13,8 @@ import com.wanasit.chrono.parser.ParserAbstract;
 
 public class ENTimeExpressionParser extends ParserAbstract {
 
-    protected static String FIRST_REG_PATTERN = "(\\W|^|T)(at|from)?\\s*(\\d{1,2}|noon|midnight)((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(\\s*(AM|PM))?(\\W|$)";
-    protected static String SECOND_REG_PATTERN = "^\\s*(\\-|\\~|\\〜|to|\\?)\\s*(\\d{1,2})((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(\\s*(AM|PM))?(?=\\s|\\W|$)";
+    protected static String FIRST_REG_PATTERN = "(^|\\W|T)(at|from)?\\s*(\\d{1,2}|noon|midnight)((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM))?(?=\\W|$)";
+    protected static String SECOND_REG_PATTERN = "^\\s*(\\-|\\~|\\〜|to|\\?)\\s*(\\d{1,2})((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM))?(?=\\W|$)";
     
     @Override
     protected Pattern pattern() {
@@ -84,8 +84,7 @@ public class ENTimeExpressionParser extends ParserAbstract {
         if (hour >= 12) meridiem = 1;
         
         result.index = matcher.start() + matcher.group(1).length();
-        result.text  = matcher.group().substring(matcher.group(1).length(), 
-                matcher.group().length() - matcher.group(12).length());
+        result.text  = matcher.group().substring(matcher.group(1).length());
         
         result.start.assign(Components.Hour, hour);
         result.start.assign(Components.Minute, minute);
