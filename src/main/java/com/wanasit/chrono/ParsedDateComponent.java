@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class ParsedDateComponent {
     
@@ -25,11 +24,9 @@ public class ParsedDateComponent {
     protected final Map<Components, Integer> impliedValues = new EnumMap<ParsedDateComponent.Components, Integer>(Components.class);
     
     public ParsedDateComponent () {
-	if (!this.isCertain(Components.Hour) && !this.isCertain(Components.Minute)) {
-            this.imply(Components.Hour, 12);
-            this.imply(Components.Minute, 0);
-            this.imply(Components.Second, 0);
-        }
+	this.imply(Components.Hour, 12);
+        this.imply(Components.Minute, 0);
+        this.imply(Components.Second, 0);
     }
     
     

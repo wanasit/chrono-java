@@ -63,7 +63,7 @@ public class ENTimeExpressionParser extends ParserAbstract {
         // ----- Second
         if(matcher.group(9) != null){ 
             second = Integer.parseInt(matcher.group(9));
-            if(second >= 60) return result;
+            if(second >= 60) return null;
         }
         
         // ----- AM & PM  
@@ -87,14 +87,12 @@ public class ENTimeExpressionParser extends ParserAbstract {
         result.text  = matcher.group().substring(matcher.group(1).length(), 
                 matcher.group().length() - matcher.group(12).length());
         
-        if (!result.start.isCertain(Components.Hour)) {
-            result.start.assign(Components.Hour, hour);
-            result.start.assign(Components.Minute, minute);
-            result.start.assign(Components.Second, second);
+        result.start.assign(Components.Hour, hour);
+        result.start.assign(Components.Minute, minute);
+        result.start.assign(Components.Second, second);
             
-            if (meridiem >= 0) 
-                result.start.assign(Components.Meridiem, meridiem);
-        }
+        if (meridiem >= 0) 
+            result.start.assign(Components.Meridiem, meridiem);
         
         Pattern secondPattern = Pattern.compile(SECOND_REG_PATTERN, Pattern.CASE_INSENSITIVE);
         matcher = secondPattern.matcher(text);
@@ -114,7 +112,6 @@ public class ENTimeExpressionParser extends ParserAbstract {
             if(minute >= 60) return result;
             
         } else if (hour > 100) {
-            if(matcher.group(10) == null) return result;
             minute = hour%100;
             hour   = hour/100;
         }
