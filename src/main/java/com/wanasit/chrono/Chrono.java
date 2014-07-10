@@ -1,5 +1,6 @@
 package com.wanasit.chrono;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -25,39 +26,13 @@ public class Chrono {
     }
 
     protected ChronoOptions options = null;
-    protected List<Parser> parsers = null;
+    protected List<Parser>  parsers = null;
     protected List<Refiner> refiners = null;
 
     public Chrono(ChronoOptions options) {
 	this.options = options;
-	this.parsers = new LinkedList<Parser>();
-	this.refiners = new LinkedList<Refiner>();
-
-	for (Class<? extends Parser> c : options.parserClasses) {
-	    try {
-		Parser parser = c.newInstance();
-		this.parsers.add(parser);
-
-	    } catch (InstantiationException e) {
-
-	    } catch (IllegalAccessException e) {
-
-	    }
-	}
-
-	for (Class<? extends Refiner> c : options.refinerClasses) {
-
-	    try {
-		Refiner refiner = c.newInstance();
-		this.refiners.add(refiner);
-
-	    } catch (InstantiationException e) {
-
-	    } catch (IllegalAccessException e) {
-
-	    }
-	}
-
+	this.parsers = new ArrayList<Parser>(options.parsers);
+	this.refiners = new ArrayList<Refiner> (options.refiners);
     }
 
     public List<ParsedResult> parse(String text) {
@@ -75,8 +50,6 @@ public class Chrono {
 	for (Parser parser : this.parsers) {
 
 	    List<ParsedResult> results = parser.execute(text, refDate, options);
-	    results = refineWithAllRefiners(results, text, options);
-
 	    allResults.addAll(results);
 	}
 

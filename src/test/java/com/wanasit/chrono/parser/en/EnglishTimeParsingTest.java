@@ -67,6 +67,22 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
     }
 
     @Test
+    public void testWithTimezones() throws IOException {
+
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("8:14:11 PM EST", refDate);
+
+	assertEquals("8:14:11 PM EST", results.get(0).text);
+	//assertDateEquals(createDate(2014, 4, 18, 3, 0), results.get(0).start);
+
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("November 4, 2003 8:14:11 PM EST", refDate);
+
+	assertEquals("November 4, 2003 8:14:11 PM EST", results.get(0).text);
+
+    }
+
+    @Test
     public void testWithRangeExpression() throws IOException {
 
 	refDate = createDate(2014, 4, 20, 12, 0);
@@ -153,13 +169,21 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 	refDate = createDate(2014, 4, 20, 12, 0);
 	results = Chrono.Parse("Wed Apr 30 2014 16:27:18 GMT+0900 (JST)", refDate);
 
-	//assertEquals("Wed Apr 30 2014 16:27:18", results.get(0).text);
+	assertEquals("Wed Apr 30 2014 16:27:18 GMT+0900 (JST)", results.get(0).text);
 	//assertDateEquals(createDate(2014, 4, 30, 16, 27, 18), results.get(0).start);
 
 	refDate = createDate(2014, 4, 20, 12, 0);
 	results = Chrono.Parse("2014-04-07T21:44:15-0600", refDate);
 
-	//assertEquals("2014-04-07T21:44:15-0600", results.get(0).text);
+	assertEquals("2014-04-07T21:44:15-0600", results.get(0).text);
+	//assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
+
+	refDate = createDate(2014, 7, 11, 12, 0);
+	results = Chrono.Parse(
+		"Our new programming challenge is going live this Saturday, July 12th at 5pm UTC.",
+		refDate);
+
+	assertEquals("Saturday, July 12th at 5pm UTC", results.get(0).text);
 	//assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
 
     }

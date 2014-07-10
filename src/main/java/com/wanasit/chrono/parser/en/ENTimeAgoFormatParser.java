@@ -32,13 +32,15 @@ public class ENTimeAgoFormatParser extends ParserAbstract {
 	calendar.setTime(refDate);
 
 	if (matcher.group(2).startsWith("day")) {
-
+	    
+	    result.start.imply(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
+	    result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
+	    
 	    calendar.add(Calendar.DAY_OF_YEAR, -amount);
 	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
 	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    result.start.imply(Components.Hour, calendar.get(Calendar.HOUR));
-	    result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
+	    
 
 	} else if (matcher.group(2).startsWith("hour")) {
 
@@ -46,7 +48,7 @@ public class ENTimeAgoFormatParser extends ParserAbstract {
 	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
 	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR));
+	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
 	    result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
 
 	} else if (matcher.group(2).startsWith("minute")) {
@@ -55,7 +57,7 @@ public class ENTimeAgoFormatParser extends ParserAbstract {
 	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
 	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR));
+	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
 	    result.start.assign(Components.Minute, calendar.get(Calendar.MINUTE));
 	}
 
