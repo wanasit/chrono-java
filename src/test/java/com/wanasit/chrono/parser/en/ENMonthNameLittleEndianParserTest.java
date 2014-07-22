@@ -121,4 +121,114 @@ public class ENMonthNameLittleEndianParserTest extends ParserTestAbstract {
         assertNotNull(results.get(0).end);
         assertDateEquals(createDate(2014, 8, 12, 12, 0), results.get(0).end);
     }
+    
+    @Test
+    public void testWithAllMonthName() throws IOException {
+
+        //
+        results = Chrono.Parse("12 January 2014", refDate);
+        assertDateEquals(createDate(2014, 1, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jan 2014", refDate);
+        assertDateEquals(createDate(2014, 1, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jan. 2014", refDate);
+        assertDateEquals(createDate(2014, 1, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 February 2014", refDate);
+        assertDateEquals(createDate(2014, 2, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Feb 2014", refDate);
+        assertDateEquals(createDate(2014, 2, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Feb. 2014", refDate);
+        assertDateEquals(createDate(2014, 2, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 March 2014", refDate);
+        assertDateEquals(createDate(2014, 3, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Mar 2014", refDate);
+        assertDateEquals(createDate(2014, 3, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Mar. 2014", refDate);
+        assertDateEquals(createDate(2014, 3, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 April 2014", refDate);
+        assertDateEquals(createDate(2014, 4, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Apr 2014", refDate);
+        assertDateEquals(createDate(2014, 4, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Apr. 2014", refDate);
+        assertDateEquals(createDate(2014, 4, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 May 2014", refDate);
+        assertDateEquals(createDate(2014, 5, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 June 2014", refDate);
+        assertDateEquals(createDate(2014, 6, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jun 2014", refDate);
+        assertDateEquals(createDate(2014, 6, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jun. 2014", refDate);
+        assertDateEquals(createDate(2014, 6, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 July 2014", refDate);
+        assertDateEquals(createDate(2014, 7, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jul 2014", refDate);
+        assertDateEquals(createDate(2014, 7, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Jul. 2014", refDate);
+        assertDateEquals(createDate(2014, 7, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 August 2014", refDate);
+        assertDateEquals(createDate(2014, 8, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Aug 2014", refDate);
+        assertDateEquals(createDate(2014, 8, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Aug. 2014", refDate);
+        assertDateEquals(createDate(2014, 8, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 September 2014", refDate);
+        assertDateEquals(createDate(2014, 9, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Sep 2014", refDate);
+        assertDateEquals(createDate(2014, 9, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Sep. 2014", refDate);
+        assertDateEquals(createDate(2014, 9, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 October 2014", refDate);
+        assertDateEquals(createDate(2014, 10, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Oct 2014", refDate);
+        assertDateEquals(createDate(2014, 10, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Oct. 2014", refDate);
+        assertDateEquals(createDate(2014, 10, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 November 2014", refDate);
+        assertDateEquals(createDate(2014, 11, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 nov 2014", refDate);
+        assertDateEquals(createDate(2014, 11, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Nov. 2014", refDate);
+        assertDateEquals(createDate(2014, 11, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 December 2014", refDate);
+        assertDateEquals(createDate(2014, 12, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Dec 2014", refDate);
+        assertDateEquals(createDate(2014, 12, 12, 12, 0), results.get(0).start);
+        
+        results = Chrono.Parse("12 Dec. 2014", refDate);
+        assertDateEquals(createDate(2014, 12, 12, 12, 0), results.get(0).start);
+        
+    }
+
+
 }

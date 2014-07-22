@@ -15,9 +15,7 @@ import com.wanasit.chrono.ParsedResult;
 
 public class ENMonthNameLittleEndianParser extends ParserAbstract {
 
-    protected static String regPattern = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?([0-9]{1,2})(st|nd|rd|th)?(\\s*(to|\\-|\\s)\\s*([0-9]{1,2})(st|nd|rd|th)?)?\\s*(January|Jan|February|Feb|March|Mar|April|Apr|May|June|Jun|July|Jul|August|Aug|September|Sep|October|Oct|November|Nov|December|Dec)((\\s*[0-9]{2,4})(\\s*BE)?)?(\\W|$)";
-    
-    
+    protected static String regPattern = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?([0-9]{1,2})(st|nd|rd|th)?(\\s*(to|\\-|\\s)\\s*([0-9]{1,2})(st|nd|rd|th)?)?\\s*(Jan(?:uary|\\.)?|Feb(?:ruary|\\.)?|Mar(?:ch|\\.)?|Apr(?:il|\\.)?|May|Jun(?:e|\\.)?|Jul(?:y|\\.)?|Aug(?:ust|\\.)?|Sep(?:tember|\\.)?|Oct(?:ober|\\.)?|Nov(?:ember|\\.)?|Dec(?:ember|\\.)?)((\\s*[0-9]{2,4})(\\s*BE)?)?(\\W|$)";
     
     @Override
     protected Pattern pattern() {

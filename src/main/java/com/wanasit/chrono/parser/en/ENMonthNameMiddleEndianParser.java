@@ -14,13 +14,26 @@ import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
 
 public class ENMonthNameMiddleEndianParser extends ParserAbstract {
-
-    protected static String regFullPattern  = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?(Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December)\\s*(([0-9]{1,2})(st|nd|rd|th)?\\s*(to|\\-)\\s*)?([0-9]{1,2})(st|nd|rd|th)?(,)?(\\s*[0-9]{4})(\\s*BE)?(\\W|$)";
-    protected static String regShortPattern = "(\\W|^)((Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?(Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December)\\s*(([0-9]{1,2})(st|nd|rd|th)?\\s*(to|\\-)\\s*)?([0-9]{1,2})(st|nd|rd|th)?([^0-9]|$)";
-
+    
+    protected static String regPattern = "(?<=\\W|^)"
+    	+ "(?:(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?"
+    	+ "(Jan(?:uary|\\.)?|Feb(?:ruary|\\.)?|Mar(?:ch|\\.)?|Apr(?:il|\\.)?|May|Jun(?:e|\\.)?|Jul(?:y|\\.)?|Aug(?:ust|\\.)?|Sep(?:tember|\\.)?|Oct(?:ober|\\.)?|Nov(?:ember|\\.)?|Dec(?:ember|\\.)?)"
+    	+ "\\s*"
+    	+ "(?:([0-9]{1,2})(?:st|nd|rd|th)?\\s*(?:to|\\-|~)\\s*)?"
+    	+ "([0-9]{1,2})(?:st|nd|rd|th)?"
+    	+ "(?:,?(\\s*[0-9]{4})(\\s*BE)?)?(?=\\W|$)";
+    
+    
+    protected static final int MONTH_NAME_GROUP 	= 1;
+    protected static final int RANGE_DATE_NUMBER_GROUP 	= 2;
+    protected static final int DATE_NUMBER_GROUP 	= 3;
+    protected static final int YEAR_NUMBER_GROUP 	= 4;
+    protected static final int YEAR_BE_GROUP 	 	= 5;
+    
+    
     @Override
     protected Pattern pattern() {
-        return Pattern.compile(regShortPattern, Pattern.CASE_INSENSITIVE);
+        return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
     }
 
     @Override
@@ -30,28 +43,18 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         calendar.setTime(refDate);
 
         ParsedResult result = new ParsedResult();
+        result.index = matcher.start();
+        result.text = matcher.group();
 
-        String monthName = matcher.group(4);
-        String dayStr = matcher.group(9);
+        String monthName = matcher.group(MONTH_NAME_GROUP);
+        String dayStr = matcher.group(DATE_NUMBER_GROUP);
         int year = calendar.get(Calendar.YEAR);
 
-        Pattern fullPattern = Pattern.compile(regFullPattern);
-        Matcher fullMatcher = fullPattern.matcher(text);
-        if (fullMatcher.find(matcher.start()) && fullMatcher.start() == matcher.start()) {
-            matcher = fullMatcher;
-            result.index = matcher.start() + matcher.group(1).length();
-            result.text = matcher.group().substring(matcher.group(1).length(),
-                    matcher.group().length() - matcher.group(14).length());
-
-            year = Integer.parseInt(matcher.group(12).trim());
-            if (matcher.group(13) != null) {
+        if (matcher.group(YEAR_NUMBER_GROUP) != null) {
+            year = Integer.parseInt(matcher.group(YEAR_NUMBER_GROUP).trim());
+            if (matcher.group(YEAR_BE_GROUP) != null) {
                 year -= 543;
             }
-        } else {
-
-            result.index = matcher.start() + matcher.group(1).length();
-            result.text = matcher.group().substring(matcher.group(1).length(),
-                    matcher.group().length() - matcher.group(11).length());
         }
         
         int day   = Integer.parseInt(dayStr);
@@ -65,9 +68,9 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
         result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 
-        if (matcher.group(5) != null) {
+        if (matcher.group(RANGE_DATE_NUMBER_GROUP) != null) {
             
-            int startDay = Integer.parseInt(matcher.group(6));
+            int startDay = Integer.parseInt(matcher.group(RANGE_DATE_NUMBER_GROUP));
             calendar.set(Calendar.DAY_OF_MONTH, startDay);
             
             // Check for an impossible date
