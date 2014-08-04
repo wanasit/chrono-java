@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.wanasit.chrono.Chrono;
 import com.wanasit.chrono.ParserTestAbstract;
+import com.wanasit.chrono.ParsedDateComponent.Components;
 
 public class EnglishTimeParsingTest extends ParserTestAbstract {
 
@@ -25,6 +26,18 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 
 	assertEquals("2014-04-18 3.00 PM", results.get(0).text);
 	assertDateEquals(createDate(2014, 4, 18, 15, 0), results.get(0).start);
+	
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("Something happen on 2014-04-18 6:56 p.m.", refDate);
+
+	assertEquals("2014-04-18 6:56 p.m.", results.get(0).text);
+	assertDateEquals(createDate(2014, 4, 18, 18, 56), results.get(0).start);
+	
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("Something happen on 2014-04-18 6:56 p.m. follow by something", refDate);
+
+	assertEquals("2014-04-18 6:56 p.m.", results.get(0).text);
+	assertDateEquals(createDate(2014, 4, 18, 18, 56), results.get(0).start);
 
 	refDate = createDate(2014, 4, 20, 12, 0);
 	results = Chrono.Parse("Something happen on 2014-04-18 13.00", refDate);
@@ -65,7 +78,7 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 	assertEquals("April 18", results.get(1).text);
 	assertDateEquals(createDate(2014, 4, 18, 12, 0), results.get(1).start);
     }
-
+    
     @Test
     public void testWithTimezones() throws IOException {
 
@@ -187,5 +200,34 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 	//assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
 
     }
+    
+    @Test
+    public void testComponentCertainty() throws IOException {
 
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("2014-04-18 3.00 AM", refDate);
+	
+	assertEquals(results.size(), 1);
+	assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
+	assertTrue(results.get(0).start.isCertain(Components.Month));
+	assertTrue(results.get(0).start.isCertain(Components.Year));
+	assertTrue(results.get(0).start.isCertain(Components.Hour));
+	assertTrue(results.get(0).start.isCertain(Components.Minute));
+	assertTrue(results.get(0).start.isCertain(Components.Meridiem));
+	
+	
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("July 12, 2014 6:56 p.m. ET", refDate);
+	
+	assertEquals(results.size(), 1);
+	assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
+	assertTrue(results.get(0).start.isCertain(Components.Month));
+	assertTrue(results.get(0).start.isCertain(Components.Year));
+	assertTrue(results.get(0).start.isCertain(Components.Hour));
+	assertTrue(results.get(0).start.isCertain(Components.Minute));
+	assertTrue(results.get(0).start.isCertain(Components.Meridiem));
+    }
+
+    
+    
 }

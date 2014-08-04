@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.wanasit.chrono.Chrono;
 import com.wanasit.chrono.ParserTestAbstract;
+import com.wanasit.chrono.ParsedDateComponent.Components;
 
 public class ENInternationalStandardParserTest extends ParserTestAbstract {
 
@@ -35,6 +36,18 @@ public class ENInternationalStandardParserTest extends ParserTestAbstract {
         assertNull(results.get(0).end);
     }
     
+    
+    @Test
+    public void testComponentCertainty() throws IOException {
+
+	refDate = createDate(2014, 4, 20, 12, 0);
+	results = Chrono.Parse("2014-04-18", refDate);
+	
+	assertEquals(results.size(), 1);
+	assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
+	assertTrue(results.get(0).start.isCertain(Components.Month));
+	assertTrue(results.get(0).start.isCertain(Components.Year));
+    }
     
     
     

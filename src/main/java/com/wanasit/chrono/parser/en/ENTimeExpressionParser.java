@@ -13,8 +13,8 @@ import com.wanasit.chrono.parser.ParserAbstract;
 
 public class ENTimeExpressionParser extends ParserAbstract {
 
-    protected static String FIRST_REG_PATTERN = "(^|\\W|T)(at|from)?\\s*(\\d{1,2}|noon|midnight)((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM))?(?=\\W|$)";
-    protected static String SECOND_REG_PATTERN = "^\\s*(\\-|\\~|\\〜|to|\\?)\\s*(\\d{1,2})((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM))?(?=\\W|$)";
+    protected static String FIRST_REG_PATTERN = "(^|\\W|T)(at|from)?\\s*(\\d{1,2}|noon|midnight)((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM|A\\.M\\.|P\\.M\\.))?(?=\\W|$)";
+    protected static String SECOND_REG_PATTERN = "^\\s*(\\-|\\~|\\〜|to|\\?)\\s*(\\d{1,2})((\\.|\\:|\\：)(\\d{2})((\\.|\\:|\\：)(\\d{2}))?)?(?!%)(\\s*(AM|PM|A\\.M\\.|P\\.M\\.))?(?=\\W|$)";
     
     @Override
     protected Pattern pattern() {
@@ -69,12 +69,12 @@ public class ENTimeExpressionParser extends ParserAbstract {
         // ----- AM & PM  
         if(matcher.group(11) != null) {
             if(hour > 12) return null;
-            if(matcher.group(11).toLowerCase().equals("am")){
+            if(matcher.group(11).replace(".", "").toLowerCase().equals("am")){
                 meridiem = 0; 
                 if(hour == 12) hour = 0;
             }
             
-            if(matcher.group(11) .toLowerCase().equals("pm")){
+            if(matcher.group(11).replace(".", "").toLowerCase().equals("pm")){
                 meridiem = 1; 
                 if(hour != 12) hour += 12;
             }

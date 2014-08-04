@@ -31,7 +31,7 @@ public class ParsedDateComponent {
     
     
     public ParsedDateComponent (ParsedDateComponent other) {
-	this.impliedValues.putAll(other.knownValues);
+	this.knownValues.putAll(other.knownValues);
 	this.impliedValues.putAll(other.impliedValues);
     }
     

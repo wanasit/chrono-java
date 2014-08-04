@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.wanasit.chrono.Chrono;
+import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.ParserTestAbstract;
 
 public class EnglishRandomParsingTest extends ParserTestAbstract {
@@ -55,6 +56,23 @@ public class EnglishRandomParsingTest extends ParserTestAbstract {
 	assertEquals(0, results.size());
 	
 	results = Chrono.Parse("%%%%%12.53 AM%%%%% ", refDate);
+	assertEquals(1, results.size());
+    }
+    
+    
+    @Test
+    public void testWithDateFromWebsites() throws IOException {
+
+	results = Chrono.Parse("July 15, 2014 6:41 p.m. ET", refDate);
+	assertEquals(1, results.size());
+	
+	results = Chrono.Parse("2014-07-15 01:17:44 UTC", refDate);
+	assertEquals(1, results.size());
+	
+	results = Chrono.Parse("Originally published Monday, July 14, 2014 at 4:05 PM", refDate);
+	assertEquals(1, results.size());
+	
+	results = Chrono.Parse("2014-07-15T03:00:01Z", refDate);
 	assertEquals(1, results.size());
     }
 

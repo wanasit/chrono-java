@@ -24,13 +24,11 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         
         try{
-        Pattern allowedPattern = Pattern.compile("\\s*(T|at|on|of|,)?\\s*", Pattern.CASE_INSENSITIVE);
-        String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
-        return allowedPattern.matcher(textBetween).matches();
-        }catch(Exception ex){
+            Pattern allowedPattern = Pattern.compile("\\s*(T|at|on|of|,)?\\s*", Pattern.CASE_INSENSITIVE);
+            String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
+            return allowedPattern.matcher(textBetween).matches();
             
-            
-        }
+        }catch(Exception ex){ }
         
         return false;
     }
@@ -45,6 +43,11 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
         beginDateTime.assign(Components.Minute, beginTime.get(Components.Minute));
         beginDateTime.assign(Components.Second, beginTime.get(Components.Second));
         
+        if (beginTime.isCertain(Components.Meridiem)) 
+            beginDateTime.assign(Components.Meridiem, beginTime.get(Components.Meridiem));
+        else if (beginTime.get(Components.Meridiem) != null)
+            beginDateTime.imply(Components.Meridiem, beginTime.get(Components.Meridiem));
+        
         dateResult.start = beginDateTime;
         
         if (dateResult.end != null || timeResult.end != null) {
@@ -56,6 +59,11 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
             endDateTime.assign(Components.Hour, endTime.get(Components.Hour));
             endDateTime.assign(Components.Minute, endTime.get(Components.Minute));
             endDateTime.assign(Components.Second, endTime.get(Components.Second));
+            
+            if (endTime.isCertain(Components.Meridiem)) 
+        	endDateTime.assign(Components.Meridiem, endTime.get(Components.Meridiem));
+            else if (beginTime.get(Components.Meridiem) != null)
+        	endDateTime.imply(Components.Meridiem, endTime.get(Components.Meridiem));
             
             dateResult.end = endDateTime;
         }
