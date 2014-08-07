@@ -227,6 +227,21 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 	assertTrue(results.get(0).start.isCertain(Components.Minute));
 	assertTrue(results.get(0).start.isCertain(Components.Meridiem));
     }
+    
+    @Test
+    public void testDistinguishTimeWithRange() throws IOException {
+
+	results = Chrono.Parse("Jul. 9, 2014 - 9:41 AM PDT", refDate);
+	
+	assertEquals(results.size(), 1);
+	assertNull(results.get(0).end);
+	assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
+	assertTrue(results.get(0).start.isCertain(Components.Month));
+	assertTrue(results.get(0).start.isCertain(Components.Year));
+	assertTrue(results.get(0).start.isCertain(Components.Hour));
+	assertTrue(results.get(0).start.isCertain(Components.Minute));
+	assertTrue(results.get(0).start.isCertain(Components.Meridiem));
+    }
 
     
     

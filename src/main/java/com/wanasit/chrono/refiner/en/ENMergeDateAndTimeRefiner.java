@@ -24,7 +24,7 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
     protected static boolean ableToMerge(String text, ParsedResult prevResult, ParsedResult curResult){
         
         try{
-            Pattern allowedPattern = Pattern.compile("\\s*(T|at|on|of|,)?\\s*", Pattern.CASE_INSENSITIVE);
+            Pattern allowedPattern = Pattern.compile("\\s*(T|at|on|of|,|-)?\\s*", Pattern.CASE_INSENSITIVE);
             String  textBetween = text.substring(prevResult.index + prevResult.text.length(), curResult.index);
             return allowedPattern.matcher(textBetween).matches();
             

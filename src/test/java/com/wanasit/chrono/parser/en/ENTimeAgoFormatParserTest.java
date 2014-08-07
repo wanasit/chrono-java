@@ -83,6 +83,7 @@ public class ENTimeAgoFormatParserTest extends ParserTestAbstract {
 	assertDateEquals(createDate(2012, 6, 4, 12, 0), results.get(0).start);
 
 	//==================
+	refDate = createDate(2012, 6, 5, 12, 0);
 	results = Chrono.Parse("I saw him 3 days ago", refDate);
 	assertEquals(1, results.size());
 
@@ -93,6 +94,7 @@ public class ENTimeAgoFormatParserTest extends ParserTestAbstract {
 	assertDateEquals(createDate(2012, 6, 2, 12, 0), results.get(0).start);
 
 	//==================
+	refDate = createDate(2012, 6, 5, 12, 0);
 	results = Chrono.Parse("I saw him 5 days ago", refDate);
 	assertEquals(1, results.size());
 
@@ -101,6 +103,18 @@ public class ENTimeAgoFormatParserTest extends ParserTestAbstract {
 
 	assertNotNull(results.get(0).start);
 	assertDateEquals(createDate(2012, 5, 31, 12, 0), results.get(0).start);
+
+	//==================
+	refDate = createDate(2012, 6, 5, 12, 0);
+	results = Chrono.Parse("I saw him 23 days ago", refDate);
+	assertEquals(1, results.size());
+
+	assertEquals(10, results.get(0).index);
+	assertEquals("23 days ago", results.get(0).text);
+
+	assertNotNull(results.get(0).start);
+	assertDateEquals(createDate(2012, 5, 13, 12, 0), results.get(0).start);
+
     }
 
     @Test

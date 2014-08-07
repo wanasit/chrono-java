@@ -74,6 +74,11 @@ public class EnglishRandomParsingTest extends ParserTestAbstract {
 	
 	results = Chrono.Parse("2014-07-15T03:00:01Z", refDate);
 	assertEquals(1, results.size());
+	
+	results = Chrono.Parse("<time class=\"trb_article_dateline_time\" datetime=\"2014-07-14T18:15:00PDT\" dat...\"></time>", refDate);
+	assertEquals(1, results.size());
+	
+	
     }
 
 }
