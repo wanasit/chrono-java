@@ -11,18 +11,21 @@ import com.wanasit.chrono.refiner.Refiner;
 
 public class Chrono {
 
-    private static final Chrono globalInstance = new Chrono(ChronoOption.sharedOptions);
+    public static final Chrono casual 	= new Chrono(ChronoOption.casualOptions());
+    public static final Chrono standard = new Chrono(ChronoOption.standartOptions());
+    
 
     public static List<ParsedResult> Parse(String text) {
-	return globalInstance.parse(text);
+	return standard.parse(text);
     }
 
     public static List<ParsedResult> Parse(String text, Date refDate) {
-	return globalInstance.parse(text, refDate);
+	return standard.parse(text, refDate);
     }
 
-    public static List<ParsedResult> Parse(String text, Date refDate, ChronoOption options) {
-	return globalInstance.parse(text, refDate, options);
+
+    public static List<ParsedResult> Parse(String text, Date refDate, ChronoOption option) {
+	return standard.parse(text, refDate, option);
     }
 
     protected ChronoOption options = null;

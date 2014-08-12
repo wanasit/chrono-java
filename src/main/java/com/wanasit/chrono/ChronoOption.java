@@ -59,5 +59,15 @@ public class ChronoOption {
 
 	return options;
     }
+    
+    public static ChronoOption casualOptions() {
+	
+	ChronoOption options = ChronoOption.standartOptions();
+	options.parsers.add(new ENCasualDateExpressionParser());
+	
 
+	return options;
+    }
+    
+    
 }
