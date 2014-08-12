@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.ParsedDateComponent.Components;
@@ -20,7 +20,7 @@ public class JPStandartDateFormatParser extends ParserAbstract {
     }
     
     @Override
-    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
+    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
         
         Calendar calendar = Calendar.getInstance(Locale.JAPANESE);
         calendar.setTime(refDate);

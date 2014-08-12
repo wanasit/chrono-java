@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.ParsedResult;
 
@@ -20,7 +20,7 @@ public class ExtractTimezoneRefiner implements Refiner {
 
     public static final Map<String, Integer> TIMEZONE_ABBR_MAP = new HashMap<String, Integer>();
 
-    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOptions options) {
+    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOption options) {
 
 	
 

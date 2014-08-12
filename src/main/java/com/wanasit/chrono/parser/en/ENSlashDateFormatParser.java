@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
@@ -21,7 +21,7 @@ public class ENSlashDateFormatParser extends ParserAbstract {
     }
 
     @Override
-    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
+    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
         // TODO Auto-generated method stub
         
         

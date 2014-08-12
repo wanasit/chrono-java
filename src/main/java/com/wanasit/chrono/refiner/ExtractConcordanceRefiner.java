@@ -2,14 +2,14 @@ package com.wanasit.chrono.refiner;
 
 import java.util.List;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedResult;
 
 public class ExtractConcordanceRefiner implements Refiner {
 
     public static final int CONCORDANCE_SIZE = 30;
 
-    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOptions options) {
+    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOption options) {
 
 	for (ParsedResult result : results) {
 

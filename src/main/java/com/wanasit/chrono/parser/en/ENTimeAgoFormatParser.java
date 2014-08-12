@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
@@ -21,7 +21,7 @@ public class ENTimeAgoFormatParser extends ParserAbstract {
     }
 
     @Override
-    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
+    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
 	int amount = Integer.parseInt(matcher.group(1));
 	if (amount < 1)

@@ -11,7 +11,7 @@ import com.wanasit.chrono.refiner.Refiner;
 
 public class Chrono {
 
-    private static final Chrono globalInstance = new Chrono(ChronoOptions.sharedOptions);
+    private static final Chrono globalInstance = new Chrono(ChronoOption.sharedOptions);
 
     public static List<ParsedResult> Parse(String text) {
 	return globalInstance.parse(text);
@@ -21,15 +21,15 @@ public class Chrono {
 	return globalInstance.parse(text, refDate);
     }
 
-    public static List<ParsedResult> Parse(String text, Date refDate, ChronoOptions options) {
+    public static List<ParsedResult> Parse(String text, Date refDate, ChronoOption options) {
 	return globalInstance.parse(text, refDate, options);
     }
 
-    protected ChronoOptions options = null;
+    protected ChronoOption options = null;
     protected List<Parser>  parsers = null;
     protected List<Refiner> refiners = null;
 
-    public Chrono(ChronoOptions options) {
+    public Chrono(ChronoOption options) {
 	this.options = options;
 	this.parsers = new ArrayList<Parser>(options.parsers);
 	this.refiners = new ArrayList<Refiner> (options.refiners);
@@ -43,7 +43,7 @@ public class Chrono {
 	return parse(text, refDate, this.options);
     }
 
-    public List<ParsedResult> parse(String text, Date refDate, ChronoOptions options) {
+    public List<ParsedResult> parse(String text, Date refDate, ChronoOption options) {
 
 	List<ParsedResult> allResults = new LinkedList<ParsedResult>();
 
@@ -60,7 +60,7 @@ public class Chrono {
     }
 
     protected List<ParsedResult> refineWithAllRefiners(List<ParsedResult> results, String text,
-	    ChronoOptions options) {
+	    ChronoOption options) {
 
 	for (Refiner refiner : this.refiners) {
 

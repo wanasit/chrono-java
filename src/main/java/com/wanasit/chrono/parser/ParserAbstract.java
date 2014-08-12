@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedResult;
 
 
@@ -15,9 +15,9 @@ public abstract class ParserAbstract implements Parser {
     
     protected abstract Pattern pattern();
     
-    protected abstract ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options);
+    protected abstract ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option);
     
-    public List<ParsedResult> execute(String text, Date refDate, ChronoOptions options) {
+    public List<ParsedResult> execute(String text, Date refDate, ChronoOption options) {
         
         List<ParsedResult> results = new LinkedList<ParsedResult>(); 
         

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.wanasit.chrono.ChronoConstants;
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
@@ -23,7 +23,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
     }
 
     @Override
-    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOptions options) {
+    protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
         ParsedResult result = new ParsedResult(matcher.start() + matcher.group(1).length(),
                 matcher.group());

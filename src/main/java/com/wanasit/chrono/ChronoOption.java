@@ -18,9 +18,9 @@ import com.wanasit.chrono.refiner.en.ENMergeDateAndTimeRefiner;
 import com.wanasit.chrono.refiner.en.ENMergeDateRangeRefiner;
 import com.wanasit.chrono.refiner.en.ENRemoveOverlapRefiner;
 
-public class ChronoOptions {
+public class ChronoOption {
 
-    public static final ChronoOptions sharedOptions = standartOptions();
+    public static final ChronoOption sharedOptions = standartOptions();
 
     public final List<Parser> parsers = new ArrayList<Parser>();
     public final List<Refiner> refiners = new ArrayList<Refiner>();
@@ -28,12 +28,12 @@ public class ChronoOptions {
     public final Map<String, Integer> timezoneMap = new HashMap<String, Integer>();
     public Integer timezoneOffset = null;
 
-    private ChronoOptions() {
+    private ChronoOption() {
 	this.timezoneOffset = Calendar.getInstance().getTimeZone().getOffset(0);
     }
 
-    public static ChronoOptions standartOptions() {
-	ChronoOptions options = new ChronoOptions();
+    public static ChronoOption standartOptions() {
+	ChronoOption options = new ChronoOption();
 
 	// All Parsers
 	options.parsers.add(new ENInternationalStandardParser());

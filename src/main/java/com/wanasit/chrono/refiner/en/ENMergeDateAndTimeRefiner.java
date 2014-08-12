@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoOptions;
+import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.refiner.RefinerAbstract;
 import com.wanasit.chrono.ParsedDateComponent;
@@ -80,7 +80,7 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
     
     
     @Override
-    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOptions options) {
+    public List<ParsedResult> refine(List<ParsedResult> results, String text, ChronoOption options) {
         
         if (results.size() < 2) return results;
         
