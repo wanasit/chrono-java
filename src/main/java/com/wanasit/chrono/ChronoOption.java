@@ -41,6 +41,7 @@ public class ChronoOption {
 	options.parsers.add(new ENMonthNameMiddleEndianParser());
 	options.parsers.add(new ENSlashBigEndianDateFormatParser());
 	options.parsers.add(new ENSlashDateFormatParser());
+	options.parsers.add(new ENTimeDeadlineFormatParser());
 	options.parsers.add(new ENTimeAgoFormatParser());
 	options.parsers.add(new ENTimeExpressionParser());
 	options.parsers.add(new JPStandartDateFormatParser());
