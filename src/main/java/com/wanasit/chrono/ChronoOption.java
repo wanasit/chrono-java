@@ -64,7 +64,7 @@ public class ChronoOption {
 	
 	ChronoOption options = ChronoOption.standartOptions();
 	options.parsers.add(new ENCasualDateExpressionParser());
-	
+	options.parsers.add(new JPCasualDateExpressionParser());
 
 	return options;
     }
