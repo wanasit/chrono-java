@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class EnglishConstants {
     
-    public static Map<String, Integer> DAY_OF_WEEK;
-    public static Map<String, Integer> MONTHS;
+    private static Map<String, Integer> DAY_OF_WEEK;
+    private static Map<String, Integer> MONTHS;
     
     public static int valueForDayOfWeek(String dayOfWeek) {
-	return DAY_OF_WEEK.get(dayOfWeek);
+	return DAY_OF_WEEK.get(dayOfWeek.toLowerCase());
     }
     
     public static int valueForMonth(String month) {
-	return MONTHS.get(month) - 1;
+	return MONTHS.get(month.toLowerCase()) - 1;
     }
     
     static {
@@ -52,5 +52,24 @@ public class EnglishConstants {
         MONTHS.put("december", 12);
         MONTHS.put("dec", 12);
         MONTHS.put("dec.", 12);
+        
+        DAY_OF_WEEK = new HashMap<String, Integer>();
+        DAY_OF_WEEK.put("sunday", 1);
+        DAY_OF_WEEK.put("sun", 1);
+        DAY_OF_WEEK.put("monday", 2);
+        DAY_OF_WEEK.put("mon", 2);
+        DAY_OF_WEEK.put("tuesday", 3);
+        DAY_OF_WEEK.put("tues", 3);
+        DAY_OF_WEEK.put("tue", 3);
+        DAY_OF_WEEK.put("wednesday", 4);
+        DAY_OF_WEEK.put("wed", 4);
+        DAY_OF_WEEK.put("thursday", 5);
+        DAY_OF_WEEK.put("thurs", 5);
+        DAY_OF_WEEK.put("thur", 5);
+        DAY_OF_WEEK.put("thu", 5);
+        DAY_OF_WEEK.put("friday", 6);
+        DAY_OF_WEEK.put("fri", 6);
+        DAY_OF_WEEK.put("saturday", 7);
+        DAY_OF_WEEK.put("sat", 7);
     }
 }

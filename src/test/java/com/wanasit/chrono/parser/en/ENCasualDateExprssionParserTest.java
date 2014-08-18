@@ -11,13 +11,6 @@ import com.wanasit.chrono.ParserTestAbstract;
 
 public class ENCasualDateExprssionParserTest extends ParserTestAbstract {
 
-    @Override
-    public void setup() {
-	super.setup();
-
-	refDate = createDate(2012, 2, 5, 12, 0);
-    }
-
     @Test
     public void test() throws IOException {
 
