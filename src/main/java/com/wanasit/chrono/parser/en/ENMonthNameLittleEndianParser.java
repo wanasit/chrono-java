@@ -48,7 +48,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
         Date date = null;
         
         int day   = Integer.parseInt(matcher.group(4));
-        int month = EnglishConstants.MONTH_NAMES.get(matcher.group(10).toLowerCase())-1;
+        int month = EnglishConstants.valueForMonth(matcher.group(10).toLowerCase());
         
         if (year > 0) {
             

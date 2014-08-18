@@ -57,7 +57,7 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         }
         
         int day   = Integer.parseInt(dayStr);
-        int month = EnglishConstants.MONTH_NAMES.get(monthName.toLowerCase())-1;        
+        int month = EnglishConstants.valueForMonth(monthName.toLowerCase());        
         calendar.set(year, month, day);
         
         // Check for an impossible date
