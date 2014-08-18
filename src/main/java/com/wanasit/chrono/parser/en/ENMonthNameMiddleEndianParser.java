@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoConstants;
 import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
@@ -58,7 +57,7 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         }
         
         int day   = Integer.parseInt(dayStr);
-        int month = ChronoConstants.MONTH_NAMES.get(monthName.toLowerCase())-1;        
+        int month = EnglishConstants.MONTH_NAMES.get(monthName.toLowerCase())-1;        
         calendar.set(year, month, day);
         
         // Check for an impossible date

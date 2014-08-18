@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wanasit.chrono.ChronoConstants;
 import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedDateComponent.Components;
@@ -49,7 +48,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
         Date date = null;
         
         int day   = Integer.parseInt(matcher.group(4));
-        int month = ChronoConstants.MONTH_NAMES.get(matcher.group(10).toLowerCase())-1;
+        int month = EnglishConstants.MONTH_NAMES.get(matcher.group(10).toLowerCase())-1;
         
         if (year > 0) {
             
