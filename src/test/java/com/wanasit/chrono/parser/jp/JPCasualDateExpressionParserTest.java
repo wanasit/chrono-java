@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import com.wanasit.chrono.Chrono;
 import com.wanasit.chrono.ParserTestAbstract;
-import com.wanasit.chrono.ParsedDateComponent.Components;
 
 public class JPCasualDateExpressionParserTest extends ParserTestAbstract {
 

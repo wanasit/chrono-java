@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import com.wanasit.chrono.ChronoOption;
 import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
@@ -16,7 +15,7 @@ import com.wanasit.chrono.parser.ParserAbstract;
 public class ENCasualDateExpressionParser extends ParserAbstract {
 
     protected static String regPattern = "(?<=\\W|^)"
-	    + "(today|tonight|tomorrow|tmr|yesterday|last\\s*night)"
+	    + "(today|tonight|tomorrow|tmr|yesterday|last\\s*night|this\\s*(morning|afternoon|evening))"
 	    + "(?=\\W|$)";
 
     @Override
@@ -35,27 +34,48 @@ public class ENCasualDateExpressionParser extends ParserAbstract {
 	calendar.setTime(refDate);
 	result.start = new ParsedDateComponent();
 
-	if (matcher.group(1).equals("tonight")) {
-	    
+	String firstMatch = matcher.group(1).toLowerCase();
+	if (firstMatch.equals("tonight")) {
+
 	    result.start.imply(Components.Hour, 0);
 	    if (calendar.get(Calendar.HOUR_OF_DAY) > 6) {
 		calendar.add(Calendar.DATE, 1);
 	    }
-	    
-	} else if (matcher.group(1).startsWith("last")) {
+
+	} else if (firstMatch.equals("tomorrow") || firstMatch.equals("tmr")) {
+
+	    calendar.add(Calendar.DATE, 1);
+
+	} else if (firstMatch.equals("yesterday")) {
+
+	    calendar.add(Calendar.DATE, -1);
+
+	} else if (firstMatch.startsWith("last")) {
 
 	    result.start.imply(Components.Hour, 0);
 	    if (calendar.get(Calendar.HOUR_OF_DAY) < 6) {
 		calendar.add(Calendar.DATE, -1);
 	    }
-	    
-	} else if (matcher.group(1).equals("tomorrow") || matcher.group(1).equals("tmr")) {
-	    
-	    calendar.add(Calendar.DATE, 1);
 
-	} else if (matcher.group(1).equals("yesterday")) {
-	    
-	    calendar.add(Calendar.DATE, -1);
+	} else if (firstMatch.startsWith("this")) {
+
+	    String secondMatch = matcher.group(2).toLowerCase();
+	    if (secondMatch.equals("afternoon")) {
+
+		result.start.imply(Components.Hour, 15);
+
+	    } else if (secondMatch.equals("evening")) {
+
+		result.start.imply(Components.Hour, 18);
+
+	    } else if (secondMatch.equals("morning")) {
+
+		result.start.imply(Components.Hour, 6);
+		if (calendar.get(Calendar.HOUR_OF_DAY) < 6) {
+		    // When say "this morning" on before 6 AM
+		    calendar.add(Calendar.DATE, -1);
+		}
+	    }
 	}
 
 	result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
