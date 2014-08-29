@@ -3,6 +3,7 @@ package com.wanasit.chrono.parser.en;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -178,18 +179,19 @@ public class EnglishTimeParsingTest extends ParserTestAbstract {
 
 	assertEquals("2014/04/08", results.get(0).text);
 	assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
-
+	
+	
+	
 	refDate = createDate(2014, 4, 20, 12, 0);
 	results = Chrono.Parse("Wed Apr 30 2014 16:27:18 GMT+0900 (JST)", refDate);
-
 	assertEquals("Wed Apr 30 2014 16:27:18 GMT+0900 (JST)", results.get(0).text);
-	//assertDateEquals(createDate(2014, 4, 30, 16, 27, 18), results.get(0).start);
+	assertDateEquals(new Date(1398842838000L), results.get(0).start);
 
+	
 	refDate = createDate(2014, 4, 20, 12, 0);
 	results = Chrono.Parse("2014-04-07T21:44:15-0600", refDate);
-
 	assertEquals("2014-04-07T21:44:15-0600", results.get(0).text);
-	//assertDateEquals(createDate(2014, 4, 8, 12, 0), results.get(0).start);
+	assertDateEquals(new Date(1396928655000L), results.get(0).start);
 
 	refDate = createDate(2014, 7, 11, 12, 0);
 	results = Chrono.Parse(

@@ -51,6 +51,13 @@ public class ParsedDateComponent {
                 joinInfo.get(Components.Minute),
                 joinInfo.get(Components.Second));
         
+        if(joinInfo.containsKey(Components.TimezoneOffset)) {
+            int adjustedOffset = joinInfo.get(Components.TimezoneOffset) 
+        	    - calendar.getTimeZone().getRawOffset() / 60000;
+            calendar.add(Calendar.MINUTE, -adjustedOffset);
+        }
+        
+        
         return calendar.getTime();
     }
     
