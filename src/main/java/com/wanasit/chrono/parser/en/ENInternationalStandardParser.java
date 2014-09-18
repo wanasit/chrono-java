@@ -15,10 +15,12 @@ public class ENInternationalStandardParser extends ParserAbstract {
     // YYYY-MM-DDThh:mm:ss.sTZD 
     // TZD = (Z or +hh:mm or -hh:mm)
     protected static String regPattern = "(?<=\\W|^)" + "([0-9]{4})\\-([0-9]{1,2})\\-([0-9]{1,2})"
-	    + "(?:T" + "([0-9]{1,2}):([0-9]{1,2})" // hh:mm
+	    + "(?:T" //..
+	    + "([0-9]{1,2}):([0-9]{1,2})" // hh:mm
 	    + "(?::([0-9]{1,2})(?:\\.\\d{1,4})?)?" // :ss.s
 	    + "(?:Z|([+-]\\d{2}):?(\\d{2})?)" // TZD (Z or ±hh:mm or ±hhmm or ±hh)
-	    + ")?" + "(?=\\W|$)";
+	    + ")?"  //..
+	    + "(?=\\W|$)";
 
     protected static final int YEAR_NUMBER_GROUP = 1;
     protected static final int MONTH_NUMBER_GROUP = 2;
@@ -66,9 +68,12 @@ public class ENInternationalStandardParser extends ParserAbstract {
 		result.start.assign(Components.TimezoneOffset, 0);
 
 	    } else {
-
+		
+		int minuteOffset = 0;
 		int hourOffset = Integer.parseInt(matcher.group(TZD_HOUR_OFFSET_GROUP));
-		int minuteOffset = Integer.parseInt(matcher.group(TZD_MINUTE_OFFSET_GROUP));
+		if (matcher.group(TZD_MINUTE_OFFSET_GROUP)!= null) 
+		    minuteOffset = Integer.parseInt(matcher.group(TZD_MINUTE_OFFSET_GROUP));
+		
 		int offset = hourOffset * 60;
 
 		if (offset < 0)
