@@ -51,7 +51,7 @@ public class ENInternationalStandardParserTest extends ParserTestAbstract {
         assertEquals(results.get(0).start.get(Components.Second), (Integer) 30);
         assertEquals(results.get(0).start.get(Components.TimezoneOffset), (Integer) 0);
         assertDateEquals(new Date(784041330000L), results.get(0).start);
-        
+
         
         results = Chrono.Parse("1994-11-05T08:15:30-05:00");
         assertEquals(1, results.size());
@@ -95,21 +95,15 @@ public class ENInternationalStandardParserTest extends ParserTestAbstract {
     }
     
     
-    
-    
     @Test
     public void testComponentCertainty() throws IOException {
 
-	refDate = createDate(2014, 4, 20, 12, 0);
-	results = Chrono.Parse("2014-04-18", refDate);
+	    refDate = createDate(2014, 4, 20, 12, 0);
+	    results = Chrono.Parse("2014-04-18", refDate);
 	
-	assertEquals(results.size(), 1);
-	assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
-	assertTrue(results.get(0).start.isCertain(Components.Month));
-	assertTrue(results.get(0).start.isCertain(Components.Year));
+	    assertEquals(results.size(), 1);
+	    assertTrue(results.get(0).start.isCertain(Components.DayOfMonth));
+	    assertTrue(results.get(0).start.isCertain(Components.Month));
+	    assertTrue(results.get(0).start.isCertain(Components.Year));
     }
-    
-    
-    
-    
 }
