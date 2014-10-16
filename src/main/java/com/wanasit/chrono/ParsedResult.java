@@ -27,7 +27,7 @@ public class ParsedResult implements Comparable<ParsedResult>, Cloneable{
 
     public ParsedResult(Object source, int index, String text) {
         this(index, text);
-        this.tags.add(source.getClass().toString());
+        this.tags.add(source.getClass().getName());
     }
     
     

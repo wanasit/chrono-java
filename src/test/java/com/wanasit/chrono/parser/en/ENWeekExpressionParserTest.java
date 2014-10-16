@@ -48,14 +48,25 @@ public class ENWeekExpressionParserTest extends ParserTestAbstract {
     }
 
     @Test
-    public void testWithinSentence() throws IOException {
+    public void testCombinationWithWeekday() throws IOException {
 
 
-    }
+        refDate = createDate(2014, 10, 16, 12, 0);
 
-    @Test
-    public void testCaseSensitiveTest() throws IOException {
+        results = Chrono.casual.parse("this week on Friday", refDate);
+        assertEquals(1, results.size());
+        assertEquals("this week on Friday", results.get(0).text);
+        assertDateEquals(createDate(2014, 10, 17, 12, 0), results.get(0).start);
 
+        results = Chrono.casual.parse("Friday this week", refDate);
+        assertEquals(1, results.size());
+        assertEquals("Friday this week", results.get(0).text);
+        assertDateEquals(createDate(2014, 10, 17, 12, 0), results.get(0).start);
+
+        results = Chrono.casual.parse("Friday last week", refDate);
+        assertEquals(1, results.size());
+        assertEquals("Friday last week", results.get(0).text);
+        assertDateEquals(createDate(2014, 10, 10, 12, 0), results.get(0).start);
 
     }
 

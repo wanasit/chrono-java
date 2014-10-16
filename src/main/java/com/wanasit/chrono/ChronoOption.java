@@ -16,6 +16,7 @@ import com.wanasit.chrono.refiner.ExtractTimezoneRefiner;
 import com.wanasit.chrono.refiner.Refiner;
 import com.wanasit.chrono.refiner.en.ENMergeDateAndTimeRefiner;
 import com.wanasit.chrono.refiner.en.ENMergeDateRangeRefiner;
+import com.wanasit.chrono.refiner.en.ENMergeWeekdayRefiner;
 import com.wanasit.chrono.refiner.en.ENRemoveOverlapRefiner;
 
 public class ChronoOption {
@@ -68,6 +69,8 @@ public class ChronoOption {
         options.parsers.add(new ENDayOfWeekDateFormatParser());
         options.parsers.add(new ENWeekExpressionParser());
         options.parsers.add(new JPCasualDateExpressionParser());
+
+        options.refiners.add(2, new ENMergeWeekdayRefiner());
 
         return options;
     }
