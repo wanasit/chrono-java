@@ -24,7 +24,7 @@ public class ENMonthNameLittleEndianParser extends ParserAbstract {
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
-        ParsedResult result = new ParsedResult(matcher.start() + matcher.group(1).length(),
+        ParsedResult result = new ParsedResult(this, matcher.start() + matcher.group(1).length(),
                 matcher.group());
         result.text = result.text.substring(matcher.group(1).length(), result.text.length()
                 - matcher.group(14).length());

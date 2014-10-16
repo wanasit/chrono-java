@@ -1,6 +1,7 @@
 package com.wanasit.chrono.parser.en;
 
 import com.wanasit.chrono.ChronoOption;
+import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.parser.ParserAbstract;
 
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 public class ENWeekExpressionParser extends ParserAbstract {
 
     private static String regPattern = "(?<=\\W|^)"
-            + "(last\\s*(d+)?\\s*weeks?|next\\s*(d+)\\s*weeks?|this\\s*week)"
+            + "((?:last|next)\\s*(\\d+)?\\s*weeks?|this\\s*week)"
             + "(?=\\W|$)";
 
     @Override
@@ -27,14 +28,25 @@ public class ENWeekExpressionParser extends ParserAbstract {
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
-        ParsedResult result = new ParsedResult(matcher.start(), matcher.group());
+        ParsedResult result = new ParsedResult(this, matcher.start(), matcher.group());
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         calendar.setTime(refDate);
 
+        int numberOfWeek = 1;
+        if (matcher.group(2) != null) {
+            numberOfWeek = Integer.parseInt(matcher.group(2));
+        }
 
+        if (result.text.toLowerCase().startsWith("last")) {
+            calendar.add(Calendar.WEEK_OF_YEAR, -numberOfWeek);
+        } else if (result.text.toLowerCase().startsWith("next")) {
+            calendar.add(Calendar.WEEK_OF_YEAR, numberOfWeek);
+        }
 
-
-
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        result.start.imply(ParsedDateComponent.Components.Year, calendar.get(Calendar.YEAR));
+        result.start.imply(ParsedDateComponent.Components.Month, calendar.get(Calendar.MONTH) + 1);
+        result.start.imply(ParsedDateComponent.Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
         return result;
     }
 }

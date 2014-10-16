@@ -17,50 +17,50 @@ public class ENTimeAgoFormatParser extends ParserAbstract {
 
     @Override
     protected Pattern pattern() {
-	return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
+        return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
     }
 
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
-	int amount = Integer.parseInt(matcher.group(1));
-	if (amount < 1)
-	    return null;
+        int amount = Integer.parseInt(matcher.group(1));
+        if (amount < 1)
+            return null;
 
-	ParsedResult result = new ParsedResult(matcher.start(), matcher.group());
-	Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-	calendar.setTime(refDate);
+        ParsedResult result = new ParsedResult(this, matcher.start(), matcher.group());
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        calendar.setTime(refDate);
 
-	if (matcher.group(2).startsWith("day")) {
-	    
-	    result.start.imply(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
-	    result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
-	    
-	    calendar.add(Calendar.DAY_OF_YEAR, -amount);
-	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
-	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    
+        if (matcher.group(2).startsWith("day")) {
 
-	} else if (matcher.group(2).startsWith("hour")) {
+            result.start.imply(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
+            result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
 
-	    calendar.add(Calendar.HOUR, -amount);
-	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
-	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
-	    result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
+            calendar.add(Calendar.DAY_OF_YEAR, -amount);
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
+            result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
 
-	} else if (matcher.group(2).startsWith("minute")) {
 
-	    calendar.add(Calendar.MINUTE, -amount);
-	    result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
-	    result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
-	    result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
-	    result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
-	    result.start.assign(Components.Minute, calendar.get(Calendar.MINUTE));
-	}
+        } else if (matcher.group(2).startsWith("hour")) {
 
-	return result;
+            calendar.add(Calendar.HOUR, -amount);
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
+            result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
+            result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
+            result.start.imply(Components.Minute, calendar.get(Calendar.MINUTE));
+
+        } else if (matcher.group(2).startsWith("minute")) {
+
+            calendar.add(Calendar.MINUTE, -amount);
+            result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
+            result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
+            result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
+            result.start.assign(Components.Hour, calendar.get(Calendar.HOUR_OF_DAY));
+            result.start.assign(Components.Minute, calendar.get(Calendar.MINUTE));
+        }
+
+        return result;
     }
 }

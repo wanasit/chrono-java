@@ -13,23 +13,23 @@ import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
 
 public class ENMonthNameMiddleEndianParser extends ParserAbstract {
-    
+
     protected static String regPattern = "(?<=\\W|^)"
-    	+ "(?:(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?"
-    	+ "(Jan(?:uary|\\.)?|Feb(?:ruary|\\.)?|Mar(?:ch|\\.)?|Apr(?:il|\\.)?|May|Jun(?:e|\\.)?|Jul(?:y|\\.)?|Aug(?:ust|\\.)?|Sep(?:tember|\\.)?|Oct(?:ober|\\.)?|Nov(?:ember|\\.)?|Dec(?:ember|\\.)?)"
-    	+ "\\s*"
-    	+ "(?:([0-9]{1,2})(?:st|nd|rd|th)?\\s*(?:to|\\-|~)\\s*)?"
-    	+ "([0-9]{1,2})(?:st|nd|rd|th)?"
-    	+ "(?:,?(\\s*[0-9]{4})(\\s*BE)?)?(?=\\W|$)";
-    
-    
-    protected static final int MONTH_NAME_GROUP 	= 1;
-    protected static final int RANGE_DATE_NUMBER_GROUP 	= 2;
-    protected static final int DATE_NUMBER_GROUP 	= 3;
-    protected static final int YEAR_NUMBER_GROUP 	= 4;
-    protected static final int YEAR_BE_GROUP 	 	= 5;
-    
-    
+            + "(?:(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sun|Mon|Tue|Wed|Thu|Fri|Sat)\\s*,?\\s*)?"
+            + "(Jan(?:uary|\\.)?|Feb(?:ruary|\\.)?|Mar(?:ch|\\.)?|Apr(?:il|\\.)?|May|Jun(?:e|\\.)?|Jul(?:y|\\.)?|Aug(?:ust|\\.)?|Sep(?:tember|\\.)?|Oct(?:ober|\\.)?|Nov(?:ember|\\.)?|Dec(?:ember|\\.)?)"
+            + "\\s*"
+            + "(?:([0-9]{1,2})(?:st|nd|rd|th)?\\s*(?:to|\\-|~)\\s*)?"
+            + "([0-9]{1,2})(?:st|nd|rd|th)?"
+            + "(?:,?(\\s*[0-9]{4})(\\s*BE)?)?(?=\\W|$)";
+
+
+    protected static final int MONTH_NAME_GROUP = 1;
+    protected static final int RANGE_DATE_NUMBER_GROUP = 2;
+    protected static final int DATE_NUMBER_GROUP = 3;
+    protected static final int YEAR_NUMBER_GROUP = 4;
+    protected static final int YEAR_BE_GROUP = 5;
+
+
     @Override
     protected Pattern pattern() {
         return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
@@ -41,10 +41,7 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         calendar.setTime(refDate);
 
-        ParsedResult result = new ParsedResult();
-        result.index = matcher.start();
-        result.text = matcher.group();
-
+        ParsedResult result = new ParsedResult(this, matcher.start(), matcher.group());
         String monthName = matcher.group(MONTH_NAME_GROUP);
         String dayStr = matcher.group(DATE_NUMBER_GROUP);
         int year = calendar.get(Calendar.YEAR);
@@ -55,35 +52,35 @@ public class ENMonthNameMiddleEndianParser extends ParserAbstract {
                 year -= 543;
             }
         }
-        
-        int day   = Integer.parseInt(dayStr);
-        int month = EnglishConstants.valueForMonth(monthName.toLowerCase());        
+
+        int day = Integer.parseInt(dayStr);
+        int month = EnglishConstants.valueForMonth(monthName.toLowerCase());
         calendar.set(year, month, day);
-        
+
         // Check for an impossible date
         if (calendar.get(Calendar.DAY_OF_MONTH) != day) return null;
-        
+
         result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
         result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
         result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
 
         if (matcher.group(RANGE_DATE_NUMBER_GROUP) != null) {
-            
+
             int startDay = Integer.parseInt(matcher.group(RANGE_DATE_NUMBER_GROUP));
             calendar.set(Calendar.DAY_OF_MONTH, startDay);
-            
+
             // Check for an impossible date
             if (calendar.get(Calendar.DAY_OF_MONTH) != startDay) return null;
-            
+
             // SWAP start - end
             result.end = result.start;
-            
+
             result.start = new ParsedDateComponent();
             result.start.assign(Components.Year, calendar.get(Calendar.YEAR));
             result.start.assign(Components.Month, calendar.get(Calendar.MONTH) + 1);
             result.start.assign(Components.DayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
         }
-        
+
         return result;
     }
 

@@ -26,9 +26,7 @@ public class ENCasualDateExpressionParser extends ParserAbstract {
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
-        ParsedResult result = new ParsedResult();
-        result.text = matcher.group();
-        result.index = matcher.start();
+        ParsedResult result = new ParsedResult(this, matcher.start(), matcher.group());
 
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         calendar.setTime(refDate);

@@ -15,12 +15,12 @@ public class ENInternationalStandardParser extends ParserAbstract {
     // YYYY-MM-DDThh:mm:ss.sTZD 
     // TZD = (Z or +hh:mm or -hh:mm)
     protected static String regPattern = "(?<=\\W|^)" + "([0-9]{4})\\-([0-9]{1,2})\\-([0-9]{1,2})"
-	    + "(?:T" //..
-	    + "([0-9]{1,2}):([0-9]{1,2})" // hh:mm
-	    + "(?::([0-9]{1,2})(?:\\.\\d{1,4})?)?" // :ss.s
-	    + "(?:Z|([+-]\\d{2}):?(\\d{2})?)" // TZD (Z or ±hh:mm or ±hhmm or ±hh)
-	    + ")?"  //..
-	    + "(?=\\W|$)";
+            + "(?:T" //..
+            + "([0-9]{1,2}):([0-9]{1,2})" // hh:mm
+            + "(?::([0-9]{1,2})(?:\\.\\d{1,4})?)?" // :ss.s
+            + "(?:Z|([+-]\\d{2}):?(\\d{2})?)" // TZD (Z or ±hh:mm or ±hhmm or ±hh)
+            + ")?"  //..
+            + "(?=\\W|$)";
 
     protected static final int YEAR_NUMBER_GROUP = 1;
     protected static final int MONTH_NUMBER_GROUP = 2;
@@ -35,57 +35,55 @@ public class ENInternationalStandardParser extends ParserAbstract {
 
     @Override
     protected Pattern pattern() {
-	return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
+        return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
     }
 
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {
 
-	ParsedResult result = new ParsedResult();
-	result.text = matcher.group();;
-	result.index = matcher.start();
+        ParsedResult result = new ParsedResult(this, matcher.start(), matcher.group());
 
-	result.start = new ParsedDateComponent();
-	result.start.assign(Components.Year, Integer.parseInt(matcher.group(YEAR_NUMBER_GROUP)));
-	result.start.assign(Components.Month, Integer.parseInt(matcher.group(MONTH_NUMBER_GROUP)));
-	result.start.assign(Components.DayOfMonth,
-		Integer.parseInt(matcher.group(DATE_NUMBER_GROUP)));
+        result.start = new ParsedDateComponent();
+        result.start.assign(Components.Year, Integer.parseInt(matcher.group(YEAR_NUMBER_GROUP)));
+        result.start.assign(Components.Month, Integer.parseInt(matcher.group(MONTH_NUMBER_GROUP)));
+        result.start.assign(Components.DayOfMonth,
+                Integer.parseInt(matcher.group(DATE_NUMBER_GROUP)));
 
-	if (matcher.group(HOUR_NUMBER_GROUP) != null) {
+        if (matcher.group(HOUR_NUMBER_GROUP) != null) {
 
-	    result.start.assign(Components.Hour, 
-		    Integer.parseInt(matcher.group(HOUR_NUMBER_GROUP)));
-	    result.start.assign(Components.Minute,
-		    Integer.parseInt(matcher.group(MINUTE_NUMBER_GROUP)));
+            result.start.assign(Components.Hour,
+                    Integer.parseInt(matcher.group(HOUR_NUMBER_GROUP)));
+            result.start.assign(Components.Minute,
+                    Integer.parseInt(matcher.group(MINUTE_NUMBER_GROUP)));
 
-	    if (matcher.group(SECOND_NUMBER_GROUP) != null) {
-		result.start.assign(Components.Second, 
-			Integer.parseInt(matcher.group(SECOND_NUMBER_GROUP)));
-	    }
-	    
-	    if (matcher.group(TZD_HOUR_OFFSET_GROUP) == null) {
+            if (matcher.group(SECOND_NUMBER_GROUP) != null) {
+                result.start.assign(Components.Second,
+                        Integer.parseInt(matcher.group(SECOND_NUMBER_GROUP)));
+            }
 
-		result.start.assign(Components.TimezoneOffset, 0);
+            if (matcher.group(TZD_HOUR_OFFSET_GROUP) == null) {
 
-	    } else {
-		
-		int minuteOffset = 0;
-		int hourOffset = Integer.parseInt(matcher.group(TZD_HOUR_OFFSET_GROUP));
-		if (matcher.group(TZD_MINUTE_OFFSET_GROUP)!= null) 
-		    minuteOffset = Integer.parseInt(matcher.group(TZD_MINUTE_OFFSET_GROUP));
-		
-		int offset = hourOffset * 60;
+                result.start.assign(Components.TimezoneOffset, 0);
 
-		if (offset < 0)
-		    offset -= minuteOffset;
-		else
-		    offset += minuteOffset;
+            } else {
 
-		result.start.assign(Components.TimezoneOffset, offset);
-	    }
+                int minuteOffset = 0;
+                int hourOffset = Integer.parseInt(matcher.group(TZD_HOUR_OFFSET_GROUP));
+                if (matcher.group(TZD_MINUTE_OFFSET_GROUP) != null)
+                    minuteOffset = Integer.parseInt(matcher.group(TZD_MINUTE_OFFSET_GROUP));
 
-	}
+                int offset = hourOffset * 60;
 
-	return result;
+                if (offset < 0)
+                    offset -= minuteOffset;
+                else
+                    offset += minuteOffset;
+
+                result.start.assign(Components.TimezoneOffset, offset);
+            }
+
+        }
+
+        return result;
     }
 }
