@@ -11,66 +11,66 @@ import com.wanasit.chrono.refiner.Refiner;
 
 public class Chrono {
 
-    public static final Chrono casual 	= new Chrono(ChronoOption.casualOptions());
-    public static final Chrono standard = new Chrono(ChronoOption.standartOptions());
-    
+    public static final Chrono casual = new Chrono(ChronoOption.casualOptions());
+    public static final Chrono standard = new Chrono(ChronoOption.standardOptions());
+
 
     public static List<ParsedResult> Parse(String text) {
-	return standard.parse(text);
+        return standard.parse(text);
     }
 
     public static List<ParsedResult> Parse(String text, Date refDate) {
-	return standard.parse(text, refDate);
+        return standard.parse(text, refDate);
     }
 
 
     public static List<ParsedResult> Parse(String text, Date refDate, ChronoOption option) {
-	return standard.parse(text, refDate, option);
+        return standard.parse(text, refDate, option);
     }
 
     protected ChronoOption options = null;
-    protected List<Parser>  parsers = null;
+    protected List<Parser> parsers = null;
     protected List<Refiner> refiners = null;
 
     public Chrono(ChronoOption options) {
-	this.options = options;
-	this.parsers = new ArrayList<Parser>(options.parsers);
-	this.refiners = new ArrayList<Refiner> (options.refiners);
+        this.options = options;
+        this.parsers = new ArrayList<Parser>(options.parsers);
+        this.refiners = new ArrayList<Refiner>(options.refiners);
     }
 
     public List<ParsedResult> parse(String text) {
-	return parse(text, new Date());
+        return parse(text, new Date());
     }
 
     public List<ParsedResult> parse(String text, Date refDate) {
-	return parse(text, refDate, this.options);
+        return parse(text, refDate, this.options);
     }
 
     public List<ParsedResult> parse(String text, Date refDate, ChronoOption options) {
 
-	List<ParsedResult> allResults = new LinkedList<ParsedResult>();
+        List<ParsedResult> allResults = new LinkedList<ParsedResult>();
 
-	for (Parser parser : this.parsers) {
+        for (Parser parser : this.parsers) {
 
-	    List<ParsedResult> results = parser.execute(text, refDate, options);
-	    allResults.addAll(results);
-	}
+            List<ParsedResult> results = parser.execute(text, refDate, options);
+            allResults.addAll(results);
+        }
 
-	Collections.sort(allResults);
-	allResults = refineWithAllRefiners(allResults, text, options);
+        Collections.sort(allResults);
+        allResults = refineWithAllRefiners(allResults, text, options);
 
-	return allResults;
+        return allResults;
     }
 
     protected List<ParsedResult> refineWithAllRefiners(List<ParsedResult> results, String text,
-	    ChronoOption options) {
+                                                       ChronoOption options) {
 
-	for (Refiner refiner : this.refiners) {
+        for (Refiner refiner : this.refiners) {
 
-	    results = refiner.refine(results, text, options);
-	}
+            results = refiner.refine(results, text, options);
+        }
 
-	return results;
+        return results;
     }
 
 }

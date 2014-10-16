@@ -1,6 +1,8 @@
 package com.wanasit.chrono;
 
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ParsedResult implements Comparable<ParsedResult>, Cloneable{
     
@@ -10,7 +12,9 @@ public class ParsedResult implements Comparable<ParsedResult>, Cloneable{
     
     public ParsedDateComponent start;
     public ParsedDateComponent end;
-    
+
+    public final Set<String> tags = new HashSet<String>();
+
     public ParsedResult() { 
         this.start = new ParsedDateComponent();
     }
@@ -19,6 +23,11 @@ public class ParsedResult implements Comparable<ParsedResult>, Cloneable{
         this.index = index;
         this.text  = text;
         this.start = new ParsedDateComponent();
+    }
+
+    public ParsedResult(Object source, int index, String text) {
+        this(index, text);
+        this.tags.add(source.getClass().toString());
     }
     
     
