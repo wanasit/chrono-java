@@ -14,7 +14,6 @@ public class Chrono {
     public static final Chrono casual = new Chrono(ChronoOption.casualOptions());
     public static final Chrono standard = new Chrono(ChronoOption.standardOptions());
 
-
     public static List<ParsedResult> Parse(String text) {
         return standard.parse(text);
     }
@@ -22,7 +21,6 @@ public class Chrono {
     public static List<ParsedResult> Parse(String text, Date refDate) {
         return standard.parse(text, refDate);
     }
-
 
     public static List<ParsedResult> Parse(String text, Date refDate, ChronoOption option) {
         return standard.parse(text, refDate, option);
@@ -62,7 +60,8 @@ public class Chrono {
         return allResults;
     }
 
-    protected List<ParsedResult> refineWithAllRefiners(List<ParsedResult> results, String text,
+    protected List<ParsedResult> refineWithAllRefiners(List<ParsedResult> results,
+                                                       String text,
                                                        ChronoOption options) {
 
         for (Refiner refiner : this.refiners) {

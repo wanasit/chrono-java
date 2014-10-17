@@ -2,13 +2,11 @@ package com.wanasit.chrono.parser.en;
 
 import com.wanasit.chrono.Chrono;
 import com.wanasit.chrono.ParserTestAbstract;
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class ENWeekExpressionParserTest extends ParserTestAbstract {
 
