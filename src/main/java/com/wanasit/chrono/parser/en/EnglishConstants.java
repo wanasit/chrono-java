@@ -7,7 +7,8 @@ public class EnglishConstants {
     
     private static Map<String, Integer> DAY_OF_WEEK;
     private static Map<String, Integer> MONTHS;
-    
+    private static Map<String, Integer> NUMBERS;
+
     public static int valueForDayOfWeek(String dayOfWeek) {
 	return DAY_OF_WEEK.get(dayOfWeek.toLowerCase());
     }
@@ -15,6 +16,11 @@ public class EnglishConstants {
     public static int valueForMonth(String month) {
 	return MONTHS.get(month.toLowerCase()) - 1;
     }
+
+    public static int valueForNumber(String number) {
+        return NUMBERS.getOrDefault(number,-1);
+    }
+
     
     static {
         MONTHS = new HashMap<String, Integer>();
@@ -71,5 +77,20 @@ public class EnglishConstants {
         DAY_OF_WEEK.put("fri", 6);
         DAY_OF_WEEK.put("saturday", 7);
         DAY_OF_WEEK.put("sat", 7);
+
+
+        NUMBERS = new HashMap<String, Integer>();
+        NUMBERS.put("one", 1);
+        NUMBERS.put("two", 2);
+        NUMBERS.put("three", 3);
+        NUMBERS.put("four", 4);
+        NUMBERS.put("five", 5);
+        NUMBERS.put("six", 6);
+        NUMBERS.put("seven", 7);
+        NUMBERS.put("eight", 8);
+        NUMBERS.put("nine", 9);
+        NUMBERS.put("ten", 10);
+        NUMBERS.put("eleven", 11);
+        NUMBERS.put("twelve", 12);
     }
 }

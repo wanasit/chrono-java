@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class ENWeekExpressionParser extends ParserAbstract {
 
     private static String regPattern = "(?<=\\W|^)"
-            + "((?:last|next)\\s*(\\d+)?\\s*weeks?|this\\s*week)"
+            + "((?:last|next)\\s*(?:(\\d+)|(\\w{3,9}))?\\s*weeks?|this\\s*week)"
             + "(?=\\W|$)";
 
     @Override
@@ -35,6 +35,9 @@ public class ENWeekExpressionParser extends ParserAbstract {
         int numberOfWeek = 1;
         if (matcher.group(2) != null) {
             numberOfWeek = Integer.parseInt(matcher.group(2));
+        } else if (matcher.group(3) != null) {
+            numberOfWeek = EnglishConstants.valueForNumber(matcher.group(3));
+            if (numberOfWeek < 0) return null;
         }
 
         if (result.text.toLowerCase().startsWith("last")) {
