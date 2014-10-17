@@ -11,6 +11,7 @@ import com.wanasit.chrono.ParsedDateComponent;
 import com.wanasit.chrono.ParsedResult;
 import com.wanasit.chrono.ParsedDateComponent.Components;
 import com.wanasit.chrono.parser.ParserAbstract;
+import com.wanasit.chrono.refiner.en.ENMergeDateRangeRefiner;
 
 public class ENDayOfWeekDateFormatParser extends ParserAbstract {
 
@@ -18,6 +19,10 @@ public class ENDayOfWeekDateFormatParser extends ParserAbstract {
             + "(?:(this|last|next)\\s*)?"
             + "(Sunday|Sun|Monday|Mon|Tuesday|Tues|Tue|Wednesday|Wed|Thursday|Thu(?:rs|r)?|Friday|Fri|Saturday|Sat)"
             + "(?=\\W|$)";
+
+    public ENDayOfWeekDateFormatParser () {
+        this.refiners.add(new ENMergeDateRangeRefiner());
+    }
 
     @Override
     protected Pattern pattern() {

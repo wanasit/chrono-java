@@ -68,6 +68,12 @@ public class ENWeekExpressionParserTest extends ParserTestAbstract {
         assertEquals("Friday last week", results.get(0).text);
         assertDateEquals(createDate(2014, 10, 10, 12, 0), results.get(0).start);
 
+
+        results = Chrono.casual.parse("From Monday to Friday next week", refDate);
+        assertEquals(1, results.size());
+        assertEquals("Monday to Friday next week", results.get(0).text);
+        assertDateEquals(createDate(2014, 10, 20, 12, 0), results.get(0).start);
+        assertDateEquals(createDate(2014, 10, 24, 12, 0), results.get(0).end);
     }
 
 }

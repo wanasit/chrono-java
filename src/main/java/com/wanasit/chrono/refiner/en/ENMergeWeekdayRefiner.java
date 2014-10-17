@@ -52,8 +52,11 @@ public class ENMergeWeekdayRefiner extends RefinerAbstract {
     protected static ParsedResult mergeResult(String text, ParsedResult weekResult, ParsedResult weekDayResult) {
 
         ParsedResult mergedResult = new ParsedResult();
+        mergedResult.tags.add(ENMergeWeekdayRefiner.class.getName());
         mergedResult.tags.addAll(weekResult.tags);
         mergedResult.tags.addAll(weekDayResult.tags);
+
+
         int startIndex = Math.min(weekResult.index, weekDayResult.index);
         int endIndex = Math.max(
                 weekResult.index + weekResult.text.length(),

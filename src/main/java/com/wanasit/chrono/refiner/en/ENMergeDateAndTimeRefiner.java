@@ -75,6 +75,8 @@ public class ENMergeDateAndTimeRefiner extends RefinerAbstract {
         
         dateResult.index = startIndex;
         dateResult.text  = text.substring(startIndex, endIndex);
+        dateResult.tags.addAll(timeResult.tags);
+        dateResult.tags.add(ENMergeDateAndTimeRefiner.class.getName());
         return dateResult;
     }
     

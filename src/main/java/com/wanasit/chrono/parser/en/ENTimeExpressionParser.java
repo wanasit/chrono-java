@@ -30,7 +30,7 @@ public class ENTimeExpressionParser extends ParserAbstract {
             return null;
         
         ParsedResult result = new ParsedResult();
-        result.tags.add(this.getClass().toString());
+        result.tags.add(this.getClass().getName());
         result.start.imply(Components.DayOfMonth,   calendar.get(Calendar.DAY_OF_MONTH));
         result.start.imply(Components.Month, calendar.get(Calendar.MONTH)+1);
         result.start.imply(Components.Year,  calendar.get(Calendar.YEAR));

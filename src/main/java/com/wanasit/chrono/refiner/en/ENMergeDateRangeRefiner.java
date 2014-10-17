@@ -42,6 +42,8 @@ public class ENMergeDateRangeRefiner extends RefinerAbstract {
         
         fromResult.index = startIndex;
         fromResult.text  = text.substring(startIndex, endIndex);
+        fromResult.tags.addAll(toResult.tags);
+        fromResult.tags.add(ENMergeDateRangeRefiner.class.getName());
         return fromResult;
     }
     
