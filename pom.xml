@@ -85,7 +85,8 @@
 					<includes>
 						<include>**/*</include>
 					</includes>
-					<repositoryName>chrono-java</repositoryName>
+                    <merge>true</merge>
+                    <repositoryName>chrono-java</repositoryName>
 					<repositoryOwner>wanasit</repositoryOwner>
 				</configuration>
 				<executions>
