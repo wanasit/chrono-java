@@ -58,6 +58,6 @@ List<ParsedResult> results = Chrono.Parse("at ... event on November 11-13. Read 
 For basic parsing, simply pass a natural language String to function `Chrono.Parse` or `Chrono.ParseDate`.  
  
 * To get a quick date result, `Chrono.ParseDate` returns `java.util.Date`.
-* To get more detailed information, `Chrono.Parse` returns `List<ParsedResult>`. 
+* To get detailed information on every date expession in the text, `Chrono.Parse` returns `List<ParsedResult>`. 
 
 
