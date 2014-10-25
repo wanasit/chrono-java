@@ -80,4 +80,14 @@ public class EnglishRandomParsingTest extends ParserTestAbstract {
 	
     }
 
+    @Test
+    public void testWithDateFromEmails() throws IOException {
+
+        results = Chrono.casual.parse("See you this. Friday", refDate);
+        assertEquals(1, results.size());
+
+    }
+
+
+
 }

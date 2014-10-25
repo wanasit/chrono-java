@@ -25,9 +25,7 @@ public class ENDayOfWeekDateFormatParser extends ParserAbstract {
     }
 
     @Override
-    protected Pattern pattern() {
-        return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
-    }
+    protected Pattern pattern() { return Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE); }
 
     @Override
     protected ParsedResult extract(String text, Date refDate, Matcher matcher, ChronoOption option) {

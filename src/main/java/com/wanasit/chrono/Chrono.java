@@ -26,6 +26,14 @@ public class Chrono {
         return standard.parse(text, refDate, option);
     }
 
+    public static Date ParseDate(String text) { return standard.parseDate(text); }
+
+    public static Date ParseDate(String text, Date refDate) { return standard.parseDate(text, refDate); }
+
+    public static Date ParseDate(String text, Date refDate, ChronoOption option) {
+        return standard.parseDate(text, refDate, option);
+    }
+
     protected ChronoOption options = null;
     protected List<Parser> parsers = null;
     protected List<Refiner> refiners = null;
@@ -58,6 +66,20 @@ public class Chrono {
         allResults = refineWithAllRefiners(allResults, text, options);
 
         return allResults;
+    }
+
+    public Date parseDate(String text) { return parseDate(text, new Date()); }
+
+    public Date parseDate(String text, Date refDate) { return parseDate(text, refDate, this.options); }
+
+    public Date parseDate(String text, Date refDate, ChronoOption option) {
+
+        List<ParsedResult> results = this.parse(text, refDate, option);
+        if (results.size() > 0) {
+            return results.get(0).start.date();
+        }
+
+        return null;
     }
 
     protected List<ParsedResult> refineWithAllRefiners(List<ParsedResult> results,
